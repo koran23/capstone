@@ -124,6 +124,11 @@ function Navigation({ isLoaded }) {
             <NavLink exact to="/about-me">
               Profile
             </NavLink>
+            <li>
+            <NavLink exact to="/chat">
+              Chat
+            </NavLink>
+            </li>
           </li>
         </ul>
         </div>

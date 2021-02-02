@@ -1,83 +1,62 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { User, Profile, Review, Reservation, Venue } = require("../../db/models");
+const { User } = require("../../db/models");
 const router = express.Router();
 
 
-// @route  GET api/profile/me
-// @desc   Test route
-// @access Public
+// get user
 router.get(
-  "/me/:id",
+  "/:id",
   asyncHandler(async (req, res) => {
 
     const userId = req.params.id;
 
-    const profile = await Profile.findOne({where: {
-      userId
-    }});
+    // const user = await User.findOne({where: {
+    //   userId
+    // }});
+    const user = await User.findOne(userId);
 
-    if(!profile) {
-        return res.json({ msg: 'There is no profile for this user' });
+    if(!user) {
+        return res.json({ msg: 'There is no user' });
     }
 
-    res.json({profile: profile});
+    res.json({user: user});
   })
 );
 
-router.post(
-  "/",
-  asyncHandler(async (req, res) => {
-    const { userId, bio, location } = req.body;
-
-    const profile = await Profile.create({ userId, bio, location })
-    res.json({profile: profile});
-  })
-);
-
-router.put(
-  '/:userId',
+// update profile pic
+router.patch(
+  '/:id',
   asyncHandler(async (req, res, next) => {
     const userId = req.params.id;
-    const profile = await Profile.findOne(userId);
+    const user = await User.findOne(userId);
 
-    if (profile) {
-      await profile.update({ 
-          bio: req.body.bio,
-          location: req.body.location 
+    if (user) {
+      await user.update({ 
+          profilePic: req.body.profilePic,
         });
-      res.json({ profile });
+      res.json({ user });
     } else {
       res.status(400).json({msg: 'no profile'})
     }
   })
 );
 
-router.get(
-  "/me/review/:id",
-  asyncHandler(async (req, res) => {
+// update aboutMe
+router.patch(
+  '/:id',
+  asyncHandler(async (req, res, next) => {
     const userId = req.params.id;
+    const user = await User.findOne(userId);
 
-    const reviews = await Review.findAll({ where: {
-        userId,
-      }, });
-
-    return res.json(reviews);
-  })
-);
-
-router.get(
-  "/me/reservation/:id",
-  asyncHandler(async (req, res) => {
-    const userId = req.params.id;
-
-    const reservations = await Reservation.findAll({ where: {
-        userId,
-      }, include: [
-        Venue
-      ]});
-
-    return res.json({reservations: reservations});
+    if (user) {
+      await user.update({ 
+          aboutMe: req.body.aboutMe 
+        });
+      res.json({ user });
+    } else {
+      res.status(400).json({msg: 'no profile'})
+    }
   })
 );
 
