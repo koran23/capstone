@@ -11,6 +11,9 @@ module.exports = {
       picture: {
         type: Sequelize.STRING
       },
+      caption: {
+        type: Sequelize.STRING
+      },
       vote: {
         type: Sequelize.INTEGER
       },

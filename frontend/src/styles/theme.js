@@ -1,5 +1,6 @@
 export const darkTheme = {
   bg: "#fafafa",
+  // bg: "#f0d8bb;",
   // bg: "#e2ebe8",
   primaryColor: "#262626",
   secondaryColor: "#b2b2b2",
