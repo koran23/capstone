@@ -11,9 +11,12 @@ const { requireAuth } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const profileRouter = require('./profile.js');
+const galleryRouter = require('./gallery.js');
 
 
 router.use('/profile', profileRouter);
+
+router.use('/gallery', galleryRouter);
 
 router.use('/session', sessionRouter);
 

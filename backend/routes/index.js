@@ -3,12 +3,15 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 const profileRouter = require('./api/profile.js');
-const reviewRouter = require('./api/review');
+const galleryRouter = require('./api/gallery.js');
+// const reviewRouter = require('./api/review');
 
 
-router.use('/review', reviewRouter);
+// router.use('/review', reviewRouter);
 
 router.use('/profile', profileRouter);
+
+router.use('/gallery', galleryRouter);
 
 router.use('/api', apiRouter);
 

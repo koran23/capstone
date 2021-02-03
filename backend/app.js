@@ -5,6 +5,7 @@ const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const { ValidationError } = require("sequelize");
+const bodyParser = require("body-parser");
 
 const { environment } = require("./config");
 const isProduction = environment === "production";
@@ -13,7 +14,10 @@ const app = express();
 const routes = require("./routes");
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({limit: '900mb'}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.limit('4M'));
 
 // Security Middleware
 if (!isProduction) {

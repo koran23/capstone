@@ -1,6 +1,9 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
+
+const { setTokenCookie } = require('../../utils/auth');
 const { Comment, Photo } = require("../../db/models");
+const { singleMulterUpload, singlePublicFileUpload } = require("../../aws3");
 const router = express.Router();
 
 
@@ -20,9 +23,32 @@ router.get(
   })
 );
 
+// upload photos
+router.post(
+  "/:userId",
+  singleMulterUpload("image"),
+  asyncHandler(async (req, res) => {
+    const {userId} = req.body;
+    console.log(req.file)
+    const url = await singlePublicFileUpload(req.file);
+    const photo = await Photo.create({
+      userId,
+      url
+    });
+
+    // setTokenCookie(res, photo);
+
+    return res.json({
+    photo,
+    });
+  })
+);
+
+
+
 // Get comments
 router.get(
-  "/:userId/:postId",
+  "/:userId/:photoId",
   asyncHandler(async (req, res) => {
     const postId = req.params.postId;
 
@@ -36,20 +62,20 @@ router.get(
   })
 );
 
-// Comment on picture
-router.post(
-  "/:userId/:postId",
-  asyncHandler(async (req, res) => {
-    const { userId, postId, comment } = req.body;
+// Comment on photo
+// router.post(
+//   "/:userId/:photoId",
+//   asyncHandler(async (req, res) => {
+//     const { userId, postId, comment } = req.body;
 
-    const comment = await Create.create({
-      userId,
-      postId,
-      comment,
-    });
-    res.json(comment);
-  })
-);
+//     const comment = await Create.create({
+//       userId,
+//       postId,
+//       comment,
+//     });
+//     res.json(comment);
+//   })
+// );
 
 // Like a photo
 router.patch(

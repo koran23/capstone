@@ -17,6 +17,7 @@ import Splash from './components/Splash';
 import AboutMeContainer from './containers/AboutMeContainer'
 
 
+
 import  ImageSlider  from './components/ImageSlider/ImageSlider'
 
 
@@ -39,9 +40,9 @@ function App() {
           <Route path="/login">
             <LoginFormPage />
           </Route>
-          {/* <Route path="/">
+          <Route path="/splash">
             <Splash />
-          </Route> */}
+          </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>    
@@ -54,7 +55,7 @@ function App() {
           <Route path="/about-me" exact>
             <AboutMeContainer />
           </Route>
-          <Route path="/gallery" exact>
+          <Route path="/gallery/:userId">
             <UploadForm/>
             <ImageGrid setSelectedImg={setSelectedImg}  />
               {selectedImg && (

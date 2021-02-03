@@ -26,7 +26,7 @@ router.post(
   })
 );
 
-// Vote on photo
+// Vote on post
 router.patch(
   '/:id',
   asyncHandler(async (req, res, next) => {
