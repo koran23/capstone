@@ -24,71 +24,70 @@ router.get(
 );
 
 // upload photos
-router.post(
-  "/:userId",
-  singleMulterUpload("image"),
-  asyncHandler(async (req, res) => {
-    const {userId} = req.body;
-    console.log(req.file)
-    const url = await singlePublicFileUpload(req.file);
-    const photo = await Photo.create({
-      userId,
-      url
-    });
-
-    // setTokenCookie(res, photo);
-
-    return res.json({
-    photo,
-    });
-  })
-);
-
-
-
-// Get comments
-router.get(
-  "/:userId/:photoId",
-  asyncHandler(async (req, res) => {
-    const postId = req.params.postId;
-
-    const comments = await Comment.findAll({
-      where: {
-        postId,
-      },
-    });
-
-    res.json({ comments: comments });
-  })
-);
-
-// Comment on photo
 // router.post(
-//   "/:userId/:photoId",
+//   "/:userId",
+//   singleMulterUpload("image"),
 //   asyncHandler(async (req, res) => {
-//     const { userId, postId, comment } = req.body;
-
-//     const comment = await Create.create({
+//     const {userId} = req.body;
+//     const url = await singlePublicFileUpload(req.file);
+//     const photo = await Photo.create({
 //       userId,
-//       postId,
-//       comment,
+//       url
 //     });
-//     res.json(comment);
+
+//     // setTokenCookie(res, photo);
+
+//     return res.json({
+//     photo,
+//     });
 //   })
 // );
 
-// Like a photo
-router.patch(
-  "/:userId/postId",
-  asyncHandler(async (req, res, next) => {
-    const photo = await Photo.findOne(postId);
 
-    await photo.update({
-      like: req.body.like,
+// Comment on photo
+router.post(
+  "/:userId",
+  asyncHandler(async (req, res) => {
+    const { userId, edit } = req.body;
+    console.log(req.body)
+
+    const comment = await Comment.create({
+      userId,
+      comment: edit,
     });
-    res.json({ photo });
+    return res.json({comment: comment});
   })
 );
+
+// Get comments
+// router.get(
+//   "/:userId/:photoId",
+//   asyncHandler(async (req, res) => {
+//     const postId = req.params.postId;
+
+//     const comments = await Comment.findAll({
+//       where: {
+//         postId,
+//       },
+//     });
+
+//     res.json({ comments: comments });
+//   })
+// );
+
+
+// Like a photo
+// router.patch(
+//   "/:userId/postId",
+//   asyncHandler(async (req, res, next) => {
+//     const photo = await Photo.findOne(postId);
+
+//     await photo.update({
+//       like: req.body.like,
+//     });
+//     res.json({ photo });
+//   })
+// );
 
 
 module.exports = router;

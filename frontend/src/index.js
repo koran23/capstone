@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { restoreCSRF, fetch } from './store/csrf';
 
 import './index.css';
@@ -34,6 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 function Root() {
+
   return (
      <ThemeProvider theme={darkTheme}>
       <GlobalStyle />

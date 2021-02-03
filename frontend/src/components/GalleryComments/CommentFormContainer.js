@@ -19,10 +19,11 @@ const Container = styled.div`
   border-radius: 5px;
 `
 
-export default function CommentFormContainer() {
+export default function CommentFormContainer({selectedImg}) {
+    console.log(selectedImg)
     return (
         <div>
-            <CommentForm/>
+            <CommentForm selectedImg={selectedImg}/>
             <CommentFormItem/>
             
         </div>
