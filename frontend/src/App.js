@@ -17,10 +17,6 @@ import Splash from './components/Splash';
 import AboutMeContainer from './containers/AboutMeContainer'
 
 
-
-import  ImageSlider  from './components/ImageSlider/ImageSlider'
-
-
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -62,9 +58,8 @@ function App() {
               <Modal
                 selectedImg={selectedImg}
                 setSelectedImg={setSelectedImg}
-              />
-            )}
-            {/* <ImageSlider slides={SliderData}/> */}
+                />
+              )}
           </Route>
         </Switch>
       </Container>

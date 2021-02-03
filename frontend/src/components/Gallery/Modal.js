@@ -118,6 +118,8 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
       setSelectedImg(null);
     }
   }
+
+  console.log(selectedImg)
   
   
   return (
@@ -137,7 +139,7 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
       />
       </div>
     </motion.div>
-    <CommentFormContainer/>
+    <CommentFormContainer selectedImg={selectedImg}/>
     </div>
     </div>
     </div>
