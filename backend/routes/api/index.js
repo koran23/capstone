@@ -12,11 +12,14 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const profileRouter = require('./profile.js');
 const galleryRouter = require('./gallery.js');
+const postRouter = require('./posts.js');
 
 
 router.use('/profile', profileRouter);
 
 router.use('/gallery', galleryRouter);
+
+router.use('/posts', postRouter);
 
 router.use('/session', sessionRouter);
 

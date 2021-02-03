@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      Photo.belongsTo(models.User, {
       foreignKey: "userId",
     });
+    Photo.hasMany(models.Comment)
   };
   return Photo;
 };
