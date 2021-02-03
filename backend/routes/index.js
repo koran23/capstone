@@ -4,6 +4,7 @@ const router = express.Router();
 const apiRouter = require('./api');
 const profileRouter = require('./api/profile.js');
 const galleryRouter = require('./api/gallery.js');
+const postRouter = require('./api/posts.js');
 // const reviewRouter = require('./api/review');
 
 
@@ -12,6 +13,8 @@ const galleryRouter = require('./api/gallery.js');
 router.use('/profile', profileRouter);
 
 router.use('/gallery', galleryRouter);
+
+router.use('/posts', postRouter);
 
 router.use('/api', apiRouter);
 

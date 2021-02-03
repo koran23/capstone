@@ -33,6 +33,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      twitter: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      facebook: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      linkden: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      instagram: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
         allowNull: false,

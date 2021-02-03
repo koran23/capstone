@@ -1,6 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { User, Post} = require("../../db/models");
+const { singleMulterUpload, singlePublicFileUpload } = require("../../aws3");
 const router = express.Router();
 
 
@@ -17,14 +18,26 @@ router.get(
 
 // Create a post
 router.post(
-  "/:id",
+  "/",
+  singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
-    const { userId, picture, caption } = req.body;
+    const {caption, userId} = req.body;
+    console.log(req.body)
+    const url = await singlePublicFileUpload(req.file);
+    const post = await Post.create({
+      caption: caption,
+      userId: userId,
+      picture: url
+    });
 
-    const post = await Post.create({ userId, picture, caption })
-    res.json({post: post});
+    // setTokenCookie(res, photo);
+
+    return res.json({
+    post
+    });
   })
 );
+
 
 // Vote on post
 router.patch(
