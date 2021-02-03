@@ -19,6 +19,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Posts'}
       },
+      photoId: {
+        type: Sequelize.INTEGER,
+        references: {model: 'Photo'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

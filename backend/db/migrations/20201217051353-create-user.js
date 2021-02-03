@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      aboutMe: {
+        type: Sequelize.STRING(256),
+        allowNull: true,
+      },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false,

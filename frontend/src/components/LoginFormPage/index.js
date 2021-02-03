@@ -29,6 +29,7 @@ function LoginFormPage() {
 
   return (
     <StyledAuth>
+      <div >
     <form onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -57,6 +58,7 @@ function LoginFormPage() {
       <br></br>
       <Link to='/signup'><Button>Sign Up</Button></Link>
     </form>
+    </div>
     </StyledAuth>
   );
 }
