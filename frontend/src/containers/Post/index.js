@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CommentInput from "../../components/CommandInput";
+import { createComment } from "../../store/posts";
+import { useDispatch, useSelector } from "react-redux";
 import Comment from "../../components/Comment";
 import {Spring} from 'react-spring'
 
@@ -50,6 +52,8 @@ const PostStyle = styled.div`
 `;
 
 export default function Post() {
+ 
+
   const image = {
     imgSource:
       "https://iso.500px.com/wp-content/uploads/2015/12/bwcover.jpg",

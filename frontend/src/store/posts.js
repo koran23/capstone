@@ -2,6 +2,7 @@ import { fetch } from "./csrf";
 
 const GET_POSTS = "profile/GET_POSTS";
 const CREATE_POST = "profile/CREATE_POST";
+const CREATE_COMMENT = "profile/CREATE_COMMENT";
 
 //Action Creators
 const getPosts = (post) => ({
@@ -12,6 +13,10 @@ const setPost = (post) => ({
   type: CREATE_POST,
   post: post,
 });
+const setComment = (comment) => ({
+  type: CREATE_COMMENT,
+  comment: comment
+})
 
 //Thunks
 export const createPost = (post) => async (dispatch) => {
@@ -34,6 +39,20 @@ export const createPost = (post) => async (dispatch) => {
   dispatch(setPost(res.data.post));
 };
 
+export const createComment = (comment) => async (dispatch) => {
+  const { comm, userId } = comment;
+
+  const res = await fetch(`/api/posts/comments/${userId}`, {
+    method: "POST",
+     headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+
+  });
+  dispatch(setComment(res.data.comment));
+};
+
 const initialState = {
   post: null,
 };
@@ -43,6 +62,8 @@ const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_POST:
       return { ...state, post: action.payload };
+    case CREATE_COMMENT:
+      return { ...state, comment: action.payload };
     default:
       return state;
   }

@@ -38,7 +38,7 @@ export const createPhoto = (photo) => async (dispatch) => {
 export const createComment = (comment) => async (dispatch) => {
   const { edit, userId } = comment;
 
-  const res = await fetch(`/api/gallery/${userId}`, {
+  const res = await fetch(`/api/gallery/comments/${userId}`, {
     method: "POST",
      headers: {
       "Content-Type": "application/json",

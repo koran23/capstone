@@ -111,7 +111,7 @@ function Navigation({ isLoaded }) {
       <div className='nav_links'>
         <ul>
           <li>
-            <NavLink exact to="/gallery/">
+            <NavLink to={`/gallery/${sessionUser.id}`}>
               Gallery
             </NavLink>
           </li>
