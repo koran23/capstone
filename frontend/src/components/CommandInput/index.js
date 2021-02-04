@@ -39,6 +39,7 @@ export default function CommentInput({postId}) {
     //  window.location.href = '/pic';
 
     const payload = {
+      postId,
       userId: loggedInUser.id,
       comm,
     };

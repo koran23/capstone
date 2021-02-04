@@ -50,7 +50,7 @@ export const createPost = (post) => async (dispatch) => {
 };
 
 export const createComment = (comment) => async (dispatch) => {
-  const { comm, userId } = comment;
+  const { comm, userId, postId } = comment;
 
   const res = await fetch(`/api/posts/comments/${userId}`, {
     method: "POST",

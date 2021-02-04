@@ -44,12 +44,13 @@ router.post(
   asyncHandler(async (req, res) => {
     //  const userId = req.params.userId;
     
-    const { userId, comm } = req.body;
+    const { userId, comm, postId } = req.body;
     
     console.log(req.body)
 
     const comment = await Comment.create({
       userId,
+      postId,
       comment: comm,
     });
     return res.json({comment: comment});
