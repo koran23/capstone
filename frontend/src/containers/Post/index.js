@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CommentInput from "../../components/CommandInput";
-import { createComment } from "../../store/posts";
+import { fetchAllPosts } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
-import Comment from "../../components/Comment";
-import {Spring} from 'react-spring'
 
 const PostStyle = styled.div`
 
@@ -52,7 +50,70 @@ const PostStyle = styled.div`
 `;
 
 export default function Post() {
+
+const dispatch = useDispatch();
+
+ const currentPosts = useSelector((fullReduxState) => {
+    return fullReduxState.post.post
+  });
+
+  console.log(currentPosts)
+
+  const loggedInUser = useSelector((store) => store.session.user);
+
+  
+
+  const Post = ({thePost}) => {
+    return (
+      <PostStyle>
+      <div className="post">
+        <div className="post__header">
+          <div className="post__headerLeft">
+            <img className="post__profilePic" src={thePost.picture} />
+            <p style={{ marginLeft: "8px" }}>{User.username}</p>
+          </div>
+          <button className="post__delete">delete</button>
+        </div>
+        <div className="post__center">
+          <img className="post__photoUrl" src={thePost.picture} />
+        </div>
+
+        <div>
+          <p>
+            <span style={{ fontWeight: "500", marginRight: "4px" }}>
+              {User.username}
+            </span>
+            {thePost.caption}
+          </p>
+        </div>
+        <div className="votes">
+				<span className="angle_up">▲</span>
+				<button
+					className="votes_count"
+					// onClick={() => product.updateCount(product.id)}
+				>
+					{/* {product.votes_count} */}
+				</button>
+			</div>
+        <CommentInput postId={thePost.id}/>
+        {/* {Comments ? (
+          Comments.map((comment) => (
+            <Comment username={User.username} caption={comment.comment} />
+          ))
+        ) : (
+          <></>
+        )} */}
+      </div>
+    </PostStyle>
+    )
+  }
  
+  useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    dispatch(fetchAllPosts());
+  }, []);
 
   const image = {
     imgSource:
@@ -69,45 +130,13 @@ export default function Post() {
   };
 
   return (
-    <PostStyle>
-      <div className="post">
-        <div className="post__header">
-          <div className="post__headerLeft">
-            <img className="post__profilePic" src={image.imgSource} />
-            <p style={{ marginLeft: "8px" }}>{User.username}</p>
-          </div>
-          <button className="post__delete">delete</button>
-        </div>
-        <div className="post__center">
-          <img className="post__photoUrl" src={image.imgSource} />
-        </div>
-
-        <div>
-          <p>
-            <span style={{ fontWeight: "500", marginRight: "4px" }}>
-              {User.username}
-            </span>
-            {User.caption}
-          </p>
-        </div>
-        <div className="votes">
-				<span className="angle_up">▲</span>
-				<button
-					className="votes_count"
-					// onClick={() => product.updateCount(product.id)}
-				>
-					{/* {product.votes_count} */}
-				</button>
-			</div>
-        <CommentInput/>
-        {/* {Comments ? (
-          Comments.map((comment) => (
-            <Comment username={User.username} caption={comment.comment} />
-          ))
-        ) : (
-          <></>
-        )} */}
-      </div>
-    </PostStyle>
+     <div>
+      <br></br>
+      {!currentPosts && <h3>Loading...</h3>}
+      {currentPosts &&
+        currentPosts.map((post) => {
+          return <Post thePost={post} />
+        })}
+    </div>
   );
 }
