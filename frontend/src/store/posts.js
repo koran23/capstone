@@ -18,6 +18,16 @@ const setComment = (comment) => ({
   comment: comment
 })
 
+export const fetchAllPosts = () => async (dispatch) => {
+  const res = await fetch(`/api/posts`);
+  // const venues = await res.json();
+  console.log(res.data.posts)
+
+  if (res.ok) {
+    dispatch(getPosts(res.data.posts));
+  }
+};
+
 //Thunks
 export const createPost = (post) => async (dispatch) => {
   const { image, caption, userId } = post;
@@ -59,11 +69,16 @@ const initialState = {
 
 //Reducer
 const postReducer = (state = initialState, action) => {
+   let newState;
   switch (action.type) {
     case CREATE_POST:
       return { ...state, post: action.payload };
     case CREATE_COMMENT:
       return { ...state, comment: action.payload };
+    case GET_POSTS:
+      newState = action.post;
+      return {...initialState,
+        post: newState};
     default:
       return state;
   }

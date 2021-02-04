@@ -12,7 +12,7 @@ router.get(
 
     const posts = await Post.findAll();
 
-    return res.json(posts);
+    return res.json({posts: posts});
   })
 );
 

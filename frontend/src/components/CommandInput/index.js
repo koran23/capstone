@@ -4,7 +4,7 @@ import { createComment } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
 
 const Comment = styled.div`
-  .commentInput {
+  form .commentInput {
     display: flex;
     justify-content: space-between;
   }
@@ -29,7 +29,7 @@ const Comment = styled.div`
   }
 `;
 
-export default function CommentInput() {
+export default function CommentInput({postId}) {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.session.user);
   const [comm, setComm] = useState("");

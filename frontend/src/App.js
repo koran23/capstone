@@ -52,7 +52,7 @@ function App() {
             <AboutMeContainer />
           </Route>
           <Route path="/gallery/:userId">
-            <UploadForm/>
+            {/* <UploadForm/> */}
             <ImageGrid setSelectedImg={setSelectedImg}  />
               {selectedImg && (
               <Modal
