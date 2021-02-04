@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchAllPhotos } from "../../store/gallery";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
@@ -38,8 +39,8 @@ const ImgGrid = styled.div`
     align-items: center; /* vertically align landscape image */
 
     /** fixed width, creates a square for our image to live */
-    width: 414px;
-    height: 414px;
+    /* width: 414px;
+    height: 414px; */
     /* Could be styles with a responsive technique a like aspect ratio prop, but that is outside the scope of here */
 
     /* background-color: ${(props) => props.theme.bg}; */
@@ -193,7 +194,22 @@ export const SliderData = [
 ];
 
 const ImageGrid = ({ setSelectedImg }) => {
+  const dispatch = useDispatch();
+
+ const currentPhotos = useSelector((fullReduxState) => {
+    return fullReduxState.gallery.photo
+  });
+
+  console.log(currentPhotos)
+
   const loggedInUser = useSelector((store) => store.session.user);
+
+    useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    dispatch(fetchAllPhotos(loggedInUser.id));
+  }, []);
 
   return (
     <ImgGrid>
@@ -202,13 +218,13 @@ const ImageGrid = ({ setSelectedImg }) => {
           <div className="index-photo-display">
             <div className="index-sub-display">
               <div className="tile">
-                {SliderData &&
-                  SliderData.map((doc) => (
+                {currentPhotos &&
+                  currentPhotos.map((doc) => (
                     <motion.div
                       layout
                       whileHover={{ opacity: 1 }}
                       s
-                      onClick={() => setSelectedImg(doc.image)}
+                      onClick={() => setSelectedImg(doc.url)}
                     >
                       <a>
                         <div className="username-display">
@@ -228,7 +244,7 @@ const ImageGrid = ({ setSelectedImg }) => {
                           </div>
                         </div>
                         <motion.img
-                          src={doc.image}
+                          src={doc.url}
                           alt="uploaded pic"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}

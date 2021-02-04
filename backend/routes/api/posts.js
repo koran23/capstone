@@ -10,9 +10,20 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
 
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({include: Comment});
 
     return res.json({posts: posts});
+  })
+);
+
+// Get all comments
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+
+    const comments = await Comment.findAll();
+    console.log(comment)
+    return res.json({comments: comments});
   })
 );
 
