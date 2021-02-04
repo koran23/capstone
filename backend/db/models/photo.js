@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      Photo.belongsTo(models.User, {
       foreignKey: "userId",
     });
-    Photo.hasMany(models.Comment)
+    Photo.hasMany(models.Comment, {
+      foreignKey: "photoId",
+    } )
   };
   return Photo;
 };

@@ -19,6 +19,16 @@ const setComment = (comment) => ({
 })
 
 //Thunks
+export const fetchAllPhotos = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/gallery/${userId}`);
+  // const venues = await res.json();
+  console.log(res.data.photos)
+
+  if (res.ok) {
+    dispatch(getGallery(res.data.photos));
+  }
+};
+
 export const createPhoto = (photo) => async (dispatch) => {
   const { image, userId } = photo;
   const formData = new FormData();
@@ -56,9 +66,14 @@ const initialState = {
 
 //Reducer
 const galleryReducer = (state = initialState, action) => {
+   let newState;
   switch (action.type) {
     case CREATE_GALLERY:
       return { ...state, photo: action.payload };
+     case GET_GALLERY:
+      newState = action.photo;
+      return {...initialState,
+        photo: newState};
     case CREATE_COMMENT:
       return { ...state, comment: action.payload };
     default:

@@ -3,6 +3,7 @@ import { fetch } from "./csrf";
 const GET_POSTS = "profile/GET_POSTS";
 const CREATE_POST = "profile/CREATE_POST";
 const CREATE_COMMENT = "profile/CREATE_COMMENT";
+const GET_COMMENTS = "profile/GET_COMMENTS";
 
 //Action Creators
 const getPosts = (post) => ({
@@ -17,7 +18,14 @@ const setComment = (comment) => ({
   type: CREATE_COMMENT,
   comment: comment
 })
+const getComments = (comment) => ({
+  type: GET_COMMENTS,
+  comment: comment
+})
 
+
+
+//Thunks
 export const fetchAllPosts = () => async (dispatch) => {
   const res = await fetch(`/api/posts`);
   // const venues = await res.json();
@@ -28,7 +36,6 @@ export const fetchAllPosts = () => async (dispatch) => {
   }
 };
 
-//Thunks
 export const createPost = (post) => async (dispatch) => {
   const { image, caption, userId } = post;
   const formData = new FormData();
@@ -63,6 +70,16 @@ export const createComment = (comment) => async (dispatch) => {
   dispatch(setComment(res.data.comment));
 };
 
+export const fetchAllComments = () => async (dispatch) => {
+  const res = await fetch(`/api/posts/comments/`);
+  // const venues = await res.json();
+  console.log(res.data.comments)
+
+  if (res.ok) {
+    dispatch(getComments(res.data.comments));
+  }
+};
+
 const initialState = {
   post: null,
 };
@@ -79,6 +96,10 @@ const postReducer = (state = initialState, action) => {
       newState = action.post;
       return {...initialState,
         post: newState};
+    case GET_COMMENTS:
+      newState = action.comments;
+      return {...initialState,
+        comment: newState};
     default:
       return state;
   }

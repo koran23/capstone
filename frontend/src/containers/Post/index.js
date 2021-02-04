@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CommentInput from "../../components/CommandInput";
 import { fetchAllPosts } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
+import Comment from '../../components/Comment/index'
 
 const PostStyle = styled.div`
 
@@ -57,6 +58,7 @@ const dispatch = useDispatch();
     return fullReduxState.post.post
   });
 
+
   console.log(currentPosts)
 
   const loggedInUser = useSelector((store) => store.session.user);
@@ -96,13 +98,13 @@ const dispatch = useDispatch();
 				</button>
 			</div>
         <CommentInput postId={thePost.id}/>
-        {/* {Comments ? (
-          Comments.map((comment) => (
+        {thePost.Comments ? (
+          thePost.Comments.map((comment) => (
             <Comment username={User.username} caption={comment.comment} />
           ))
         ) : (
           <></>
-        )} */}
+        )}
       </div>
     </PostStyle>
     )
