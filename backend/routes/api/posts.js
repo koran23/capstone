@@ -1,6 +1,6 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { User, Post} = require("../../db/models");
+const { User, Post, Comment} = require("../../db/models");
 const { singleMulterUpload, singlePublicFileUpload } = require("../../aws3");
 const router = express.Router();
 
@@ -35,6 +35,24 @@ router.post(
     return res.json({
     post
     });
+  })
+);
+
+// comment on post
+router.post(
+  "/comments/:userId",
+  asyncHandler(async (req, res) => {
+    //  const userId = req.params.userId;
+    
+    const { userId, comm } = req.body;
+    
+    console.log(req.body)
+
+    const comment = await Comment.create({
+      userId,
+      comment: comm,
+    });
+    return res.json({comment: comment});
   })
 );
 

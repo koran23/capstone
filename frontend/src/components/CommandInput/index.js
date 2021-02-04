@@ -1,13 +1,15 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from "react";
+import styled from "styled-components";
+import { createComment } from "../../store/posts";
+import { useDispatch, useSelector } from "react-redux";
 
 const Comment = styled.div`
-.commentInput{
+  .commentInput {
     display: flex;
     justify-content: space-between;
-}
+  }
 
-.commentInput__textarea {
+  .commentInput__textarea {
     height: 100%;
     width: 100%;
     font-family: "Fira Sans", sans-serif;
@@ -15,28 +17,51 @@ const Comment = styled.div`
     padding: 0.5rem 1rem;
     border: none;
     resize: none;
-}
+  }
 
-.commentInput__textarea:focus {
+  .commentInput__textarea:focus {
     outline: none;
-}
+  }
 
-.commentInput__btn {
+  .commentInput__btn {
     background-color: white;
     border: none;
-}
-`
+  }
+`;
 
 export default function CommentInput() {
-    return (
-        <Comment>
-        <div className="commentInput">
-            <textarea
-            placeholder='Write a comment...'
-            className="commentInput__textarea"
-            rows="1"></textarea>
-                <button className="commentInput__btn">Post</button>
-        </div>
-        </Comment>
-    )
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((store) => store.session.user);
+  const [comm, setComm] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //  window.location.href = '/pic';
+
+    const payload = {
+      userId: loggedInUser.id,
+      comm,
+    };
+    console.log(payload);
+
+    dispatch(createComment(payload));
+    // history.push(`/gallery`);
+  };
+
+  return (
+    <Comment>
+      <div className="commentInput">
+          <form onSubmit={onSubmit}>
+        <textarea
+        value={comm}
+        onChange={(e) => setComm(e.target.value)}
+          placeholder="Write a comment..."
+          className="commentInput__textarea"
+          rows="1"
+        ></textarea>
+        <button className="commentInput__btn">Post</button>
+        </form>
+      </div>
+    </Comment>
+  );
 }

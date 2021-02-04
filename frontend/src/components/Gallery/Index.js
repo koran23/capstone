@@ -118,7 +118,7 @@ export const SliderData = [
 ]
 
 const ImageGrid = ({setSelectedImg}) => {
-   
+ 
   
   return (
 

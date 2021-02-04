@@ -24,31 +24,33 @@ router.get(
 );
 
 // upload photos
-// router.post(
-//   "/:userId",
-//   singleMulterUpload("image"),
-//   asyncHandler(async (req, res) => {
-//     const {userId} = req.body;
-//     const url = await singlePublicFileUpload(req.file);
-//     const photo = await Photo.create({
-//       userId,
-//       url
-//     });
+router.post(
+  "/:userId",
+  singleMulterUpload("image"),
+  asyncHandler(async (req, res) => {
+    const {userId} = req.body;
+    const url = await singlePublicFileUpload(req.file);
+    const photo = await Photo.create({
+      userId,
+      url
+    });
 
-//     // setTokenCookie(res, photo);
+    // setTokenCookie(res, photo);
 
-//     return res.json({
-//     photo,
-//     });
-//   })
-// );
+    return res.json({
+    photo,
+    });
+  })
+);
 
 
 // Comment on photo
 router.post(
-  "/:userId",
+  "/comments/:userId",
   asyncHandler(async (req, res) => {
-    const { userId, edit } = req.body;
+     const userId = req.params.userId;
+    const { edit } = req.body;
+    
     console.log(req.body)
 
     const comment = await Comment.create({

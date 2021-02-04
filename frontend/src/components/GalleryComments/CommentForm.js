@@ -188,6 +188,7 @@ export default function CommentForm({ selectedImg }) {
 
     const onSubmit = (e) => {
     e.preventDefault();
+    //  window.location.href = '/pic';
 
     const payload = {
       userId: loggedInUser.id,

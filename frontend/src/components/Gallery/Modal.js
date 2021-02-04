@@ -113,6 +113,8 @@ const Mod = styled.div`
 
 const Modal = ({ setSelectedImg, selectedImg }) => {
 
+  
+ 
   const handleClick = (e) => {
     if (e.target.classList.contains('photo-show-div')) {
       setSelectedImg(null);
