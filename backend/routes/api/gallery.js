@@ -13,11 +13,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const userId = req.params.userId;
 
-    const photos = await Photo.findAll({
-      where: {
-        userId,
-      },
-    });
+    const photos = await Photo.findAll({include: Comment});
 
     res.json({ photos: photos });
   })
@@ -49,12 +45,13 @@ router.post(
   "/comments/:userId",
   asyncHandler(async (req, res) => {
      const userId = req.params.userId;
-    const { edit } = req.body;
+    const { edit, photoId } = req.body;
     
     console.log(req.body)
 
     const comment = await Comment.create({
       userId,
+      photoId,
       comment: edit,
     });
     return res.json({comment: comment});
@@ -63,9 +60,8 @@ router.post(
 
 // Get comments
 // router.get(
-//   "/:userId/:photoId",
+//   "/:userId",
 //   asyncHandler(async (req, res) => {
-//     const postId = req.params.postId;
 
 //     const comments = await Comment.findAll({
 //       where: {

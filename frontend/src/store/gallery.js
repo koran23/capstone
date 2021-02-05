@@ -29,6 +29,16 @@ export const fetchAllPhotos = (userId) => async (dispatch) => {
   }
 };
 
+export const fetchAllComments = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/gallery/${userId}`);
+  // const venues = await res.json();
+  console.log(res.data.photos)
+
+  if (res.ok) {
+    dispatch(getGallery(res.data.photos));
+  }
+};
+
 export const createPhoto = (photo) => async (dispatch) => {
   const { image, userId } = photo;
   const formData = new FormData();
@@ -46,7 +56,7 @@ export const createPhoto = (photo) => async (dispatch) => {
 };
 
 export const createComment = (comment) => async (dispatch) => {
-  const { edit, userId } = comment;
+  const { photoId, edit, userId } = comment;
 
   const res = await fetch(`/api/gallery/comments/${userId}`, {
     method: "POST",

@@ -40,7 +40,7 @@ const CommentSection = styled.div`
 }
 `
 
-export default function CommentFormItem() {
+export default function CommentFormItem({username, comment}) {
   const dispatch = useDispatch();
 
 //  const currentComments = useSelector((fullReduxState) => {
@@ -69,7 +69,7 @@ export default function CommentFormItem() {
             {comment.username}
           </Link> */}
           <div className="comment-body-and-delete">
-            {/* <p>{comment.body}</p> */}
+            <p>{comment}</p>
             {/* <span>{this.deleteCommentButton()}</span> */}
           </div>
         </div>

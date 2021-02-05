@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {createComment} from '../../store/gallery'
+import { createComment } from "../../store/gallery";
+import CommentFormItem from '../../components/GalleryComments/CommentFormItem'
 // import { useState } from "react";
 
 const Comments = styled.div`
@@ -180,25 +181,42 @@ const Comments = styled.div`
 
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
-
+  const [edit, setEdit] = useState("");
+  const loggedInUser = useSelector((store) => store.session.user);
   let likeButtonText = <i className="fa fa-heart" aria-hidden="true"></i>;
 
-  const loggedInUser = useSelector((store) => store.session.user);
-  const [edit, setEdit] = useState("");
+  const currentComments = useSelector((fullReduxState) => {
+    return fullReduxState.gallery.photo;
+  });
 
-    const onSubmit = (e) => {
+  console.log(currentComments)
+
+  const onSubmit = (e) => {
     e.preventDefault();
     //  window.location.href = '/pic';
 
     const payload = {
+      photoId: selectedImg.id,
       userId: loggedInUser.id,
       edit,
     };
-    console.log(payload)
+    console.log(payload);
 
     dispatch(createComment(payload));
     // history.push(`/gallery`);
   };
+
+  const Comment = ({theComment}) => {
+    return (
+      <div>{theComment.Comments ? (
+          theComment.Comments.map((comment) => (
+            <CommentFormItem username={loggedInUser.username} comment={comment.comment} />
+          ))
+        ) : (
+          <></>
+        )}</div>
+    )
+  }
 
   return (
     <Comments>
@@ -219,6 +237,11 @@ export default function CommentForm({ selectedImg }) {
           <div className="comment-form-container">
             <form className="comment-form" onSubmit={onSubmit}>
               {/* {this.renderComments()} */}
+              {!currentComments && <h3>Loading...</h3>}
+              {currentComments &&
+                currentComments.map((comment) => {
+                  return <Comment theComment={comment} />;
+                })}
               <div className="comment-div">
                 <input
                   type="text"
