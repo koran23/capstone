@@ -10,9 +10,9 @@ const PostStyle = styled.div`
   .post {
     background-color: ${(props) => props.theme.white};;
     max-width: 600px;
-    width: 90vw;
+    width: 100vw;
     padding: 16px;
-    border-radius: 20px;
+    border-radius: 30px;
   }
 
   .post__header {
@@ -44,9 +44,11 @@ const PostStyle = styled.div`
   }
 
   .post__photoUrl {
+    /* position: absolute; */
     width: 100%;
     object-fit: cover;
     margin: 16px 0px;
+    border-radius: 30px;
   }
 `;
 
@@ -66,6 +68,9 @@ const dispatch = useDispatch();
   
 
   const Post = ({thePost}) => {
+
+      
+
     return (
       <PostStyle>
       <div className="post">
@@ -100,7 +105,7 @@ const dispatch = useDispatch();
         <CommentInput postId={thePost.id}/>
         {thePost.Comments ? (
           thePost.Comments.map((comment) => (
-            <Comment username={User.username} caption={comment.comment} />
+            <Comment username={User.username} id={comment.userId} caption={comment.comment} />
           ))
         ) : (
           <></>

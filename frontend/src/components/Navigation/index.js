@@ -14,10 +14,10 @@ const Bar = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: ${(props) => props.theme.grey};
+  background: ${(props) => props.theme.bg};
   z-index: 99;
   padding: 10px 10%;
-  color: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.grey};
 
   .list {
     text-decoration: none;
@@ -53,6 +53,7 @@ const Bar = styled.div`
   ul {
     list-style: none;
     display: flex;
+    /* flex-direction: column; */
     position: relative;
     top: 2px;
   }
@@ -124,12 +125,12 @@ function Navigation({ isLoaded }) {
             <NavLink exact to="/about-me">
               Profile
             </NavLink>
-            <li>
+            </li>
+            {/* <li>
             <NavLink exact to="/chat">
               Chat
             </NavLink>
-            </li>
-          </li>
+            </li> */}
         </ul>
         </div>
         <div>
