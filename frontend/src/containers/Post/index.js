@@ -117,19 +117,12 @@ const dispatch = useDispatch();
     dispatch(fetchAllPosts());
   }, []);
 
-  const image = {
-    imgSource:
-      "https://iso.500px.com/wp-content/uploads/2015/12/bwcover.jpg",
-  };
 
   const User = {
     caption: "Yerrrr!",
     username: "Segen Shoots",
   };
 
-  const Comments = {
-    comment: "Hello",
-  };
 
   return (
      <div>

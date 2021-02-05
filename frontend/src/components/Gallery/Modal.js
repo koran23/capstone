@@ -114,13 +114,13 @@ const Mod = styled.div`
 const Modal = ({ setSelectedImg, selectedImg }) => {
 
   
- 
   const handleClick = (e) => {
+    // window.location.href = '/post'
     if (e.target.classList.contains('photo-show-div')) {
       setSelectedImg(null);
     }
   }
-
+  
   console.log(selectedImg)
   
   
@@ -135,7 +135,7 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
       animate={{ opacity: 1 }}
     >
       <div className='photo-show-div'>
-      <motion.img  src={selectedImg} alt="enlarged pic" 
+      <motion.img  src={selectedImg.url} alt="enlarged pic" 
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
       />
