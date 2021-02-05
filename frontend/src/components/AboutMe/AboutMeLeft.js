@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components'
+import {editProfile} from '../../store/profile'
 
 const Left = styled.div`
 .about-left{
@@ -101,14 +103,66 @@ const Left = styled.div`
 `
 
 export default function AboutMeLeft() {
+  const dispatch = useDispatch();
+  const [imgPreview, setImagePreview] = useState(null);
+  const [image, setImage] = useState({ name: null });
+   const [errors, setErrors] = useState([]);
+
+  const loggedInUser = useSelector((state) => {
+    return state.session.user;
+  });
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    let newErrors = [];
+    console.log(image)
+    dispatch(editProfile({ userId: loggedInUser.id, image }))
+      .then(() => {
+        setImage(null);
+      })
+      .catch((res) => {
+        if (res.data && res.data.errors) {
+          newErrors = res.data.errors;
+          setErrors(newErrors);
+        }
+      });
+  };
+
+
+    const updatePost = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
+
+    const fileReader = new FileReader();
+    if (file) {
+      fileReader.readAsDataURL(file);
+    }
+    fileReader.onloadend = () => {
+      setImagePreview(fileReader.result);
+    };
+  };
+
+  
+
     return (
         <Left>
         <div class = "about-left">
         <div class = "about-left-content">
           <div>
+              <form onSubmit={handleSubmit}>
+              <label>
+                <input type="file" onChange={updatePost} name="image" />
+                <span>+</span>
+              </label>
+              <img className="imgPreview" src={imgPreview} alt=""></img>
+              <br></br>
+              <button className="contact-form-btn-upload"  type="submit">
+                Post
+              </button>
+            </form>
             <div class = "shadow">
               <div class = "about-img">
-                <img src = "about-img.jpg" alt = "about image"/>
+                <img src = {loggedInUser.profilePic} alt = "about image"/>
               </div>
             </div>
             <h2>Ahdari<br></br>Scott</h2>

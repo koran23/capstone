@@ -46,6 +46,22 @@ const ImgGrid = styled.div`
     /* background-color: ${(props) => props.theme.bg}; */
   }
 
+  a {
+  flex-direction: column;
+  img:hover {
+    cursor: pointer;
+  }
+
+	img {
+		box-shadow: 0 1px 1px 2px rgba(0,0,0, .15);
+		border-radius: 2px;
+  }
+
+  display: inline-block;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
   a:hover {
     opacity: 0.9;
 
@@ -94,6 +110,7 @@ const ImgGrid = styled.div`
       width: 100%;
       border-radius: 50%;
       vertical-align: baseline;
+      
     }
 
     a {
@@ -165,22 +182,26 @@ const ImgGrid = styled.div`
   }
 `;
 
-const ImageGrid = ({ setSelectedImg }) => {
+const ImageGrid = ({ setSelectedImg, selectedImg }) => {
   const dispatch = useDispatch();
-   const [selectedId, setSelectedId] = useState(null);
 
   const currentPhotos = useSelector((fullReduxState) => {
     return fullReduxState.gallery.photo;
   });
 
+
+  // console.log(selectedImg.id);
+
   const loggedInUser = useSelector((store) => store.session.user);
+
+  
 
 
   useEffect(async () => {
     // Request to the server.
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
-    dispatch(fetchAllPhotos(loggedInUser.id));
+    dispatch(fetchAllPhotos({userId: loggedInUser.id}));
   }, []);
 
   return (
@@ -197,7 +218,9 @@ const ImageGrid = ({ setSelectedImg }) => {
                       layout
                       whileHover={{ opacity: 1 }}
                       s
-                      onClick={() => setSelectedImg(doc)}
+                      onClick={() => {
+                        setSelectedImg(doc);
+                      }}
                     >
                       <a>
                         <div className="username-display">

@@ -177,18 +177,19 @@ const Comments = styled.div`
       max-width: 180px;
     }
   }
+
+
 `;
 
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
+  const [like, setLike] = useState(false);
   const loggedInUser = useSelector((store) => store.session.user);
   let likeButtonText = <i className="fa fa-heart" aria-hidden="true"></i>;
 
-  const currentComments = useSelector((fullReduxState) => {
-    return fullReduxState.gallery.photo;
-  });
-
+const currentComments = [selectedImg]
+console.log(selectedImg)
   console.log(currentComments)
 
   const onSubmit = (e) => {
@@ -206,15 +207,30 @@ export default function CommentForm({ selectedImg }) {
     // history.push(`/gallery`);
   };
 
+  const onLike = (e) => {
+    e.preventDefault();
+
+    console.log(selectedImg)
+    if (!selectedImg.like) setLike(true);
+    if (selectedImg.like) setLike(false);
+
+    const payload = {
+      like
+    }
+  }
+
+
   const Comment = ({theComment}) => {
     return (
+      
       <div>{theComment.Comments ? (
           theComment.Comments.map((comment) => (
-            <CommentFormItem username={loggedInUser.username} comment={comment.comment} />
+            <CommentFormItem username={loggedInUser.username} userId={comment.userId} comment={comment.comment} />
           ))
         ) : (
           <></>
         )}</div>
+        
     )
   }
 
@@ -232,7 +248,7 @@ export default function CommentForm({ selectedImg }) {
             {photo.username}
           </Link> */}
           </h3>
-          <button className="like-button">{likeButtonText}</button>
+          <button onClick={onLike} value={like} className="like-button">{likeButtonText}</button>
           {/* {this.renderLikes()} */}
           <div className="comment-form-container">
             <form className="comment-form" onSubmit={onSubmit}>

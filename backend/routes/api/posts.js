@@ -16,16 +16,16 @@ router.get(
   })
 );
 
-// Get all comments
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
+// // Get all comments
+// router.get(
+//   "/",
+//   asyncHandler(async (req, res) => {
 
-    const comments = await Comment.findAll();
-    console.log(comment)
-    return res.json({comments: comments});
-  })
-);
+//     const comments = await Comment.findAll();
+//     console.log(comment)
+//     return res.json({comments: comments});
+//   })
+// );
 
 // Create a post
 router.post(

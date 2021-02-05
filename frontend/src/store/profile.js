@@ -10,9 +10,9 @@ const getProfile = (profile) => ({
   type: GET_PROFILE,
   profile: profile
 });
-const setProfile = (profile) => ({
+const setProfile = (profilePic) => ({
   type: CREATE_PROFILE,
-  profile: profile
+  profilePic: profilePic
 });
 const removeProfile = (profile) => ({
   type: REMOVE_PROFILE,
@@ -39,21 +39,20 @@ export const deleteCurrentProfile = (userId) => async (dispatch) => {
   
   
 };
-export const editProfile = (userId, payload) => async (dispatch) => {
+export const editProfile = (profilePic) => async (dispatch) => {
+    const { image, userId } = profilePic;
+  const formData = new FormData();
+
+  // for single file
+ if (image) formData.append("image", image);
+
   const res = await fetch(`/api/profile/${userId}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+    // headers: {"Content-Type": "multipart/form-data"},
+    body: formData,
   });
-  // const venues = await res.json();
 
-  if (res.ok) {
-    const profile = await res.json
-    dispatch(setProfile(profile));
-    return profile;
-  }
+  dispatch(setProfile(res.data.profilePic));
 };
 
 export const createProfile = (body) => async (dispatch) => {
@@ -73,6 +72,7 @@ export const createProfile = (body) => async (dispatch) => {
 
 const initialState = {
   profile: null,
+  profilePic: null
 };
 
 //Reducer
@@ -84,10 +84,7 @@ const profileReducer = (state = initialState, action) => {
         profile: action.profile,
       };
     case CREATE_PROFILE:
-      return {
-        ...state,
-        profile: action.profile,
-      };
+      return { ...state, profilePic: action.payload };
     case REMOVE_PROFILE:
       return {
         ...state,
