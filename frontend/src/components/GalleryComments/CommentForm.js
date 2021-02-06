@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/gallery";
+import { likePhoto } from "../../store/gallery";
 import CommentFormItem from '../../components/GalleryComments/CommentFormItem'
 // import { useState } from "react";
 
@@ -184,7 +185,7 @@ const Comments = styled.div`
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState('false');
   const loggedInUser = useSelector((store) => store.session.user);
   let likeButtonText = <i className="fa fa-heart" aria-hidden="true"></i>;
 
@@ -211,12 +212,17 @@ console.log(selectedImg)
     e.preventDefault();
 
     console.log(selectedImg)
-    if (!selectedImg.like) setLike(true);
-    if (selectedImg.like) setLike(false);
+    if (like == 'false') setLike('true');
+    if (like == 'true') setLike('false');
+    console.log(like)
 
     const payload = {
+      photoId: selectedImg.id,
+      userId: loggedInUser.id,
       like
-    }
+    };
+
+    dispatch(likePhoto(payload))
   }
 
 
