@@ -199,7 +199,7 @@ export default function CommentForm({ selectedImg }) {
   const [edit, setEdit] = useState("");
   const [like, setLike] = useState(false);
   const loggedInUser = useSelector((store) => store.session.user);
-  let likeButtonText = <i className="fa fa-heart" aria-hidden="true"></i>;
+  let likeButtonText = <i className="fa fa-heart like-button" aria-hidden="true"></i>;
 
 const currentComments = [selectedImg]
 
@@ -235,18 +235,20 @@ const currentComments = [selectedImg]
   
  
 
-  // useEffect(async () => {
-  //   // Request to the server.
-  //   // const response = await fetch("/api/bands");
-  //   // setBands(response.data.bands);
+  useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    const setLikedImg = () => selectedImg.like = like
+    setLikedImg()
     
-  // }, [setLike]);
+  }, [like]);
 
 
 
-  //  if (selectedImg.like = true) {
-  //      likeButtonText = <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>;
-  //   }
+   if (selectedImg.like == true) {
+       likeButtonText = <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>;
+    }
 
 
   const Comment = ({theComment}) => {
