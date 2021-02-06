@@ -79,17 +79,23 @@ router.post(
 
 
 // Like a photo
-// router.patch(
-//   "/:userId/postId",
-//   asyncHandler(async (req, res, next) => {
-//     const photo = await Photo.findOne(postId);
+router.patch(
+  "/like/:userId",
+  asyncHandler(async (req, res, next) => {
+    const {userId, photoId, like} = req.body;
+    const photo = await Photo.findByPk(photoId);
+    if (photo) await photo.update({
+      photoId: photoId,
+      like: like
+    });
 
-//     await photo.update({
-//       like: req.body.like,
-//     });
-//     res.json({ photo });
-//   })
-// );
+    // setTokenCookie(res, photo);
+
+    return res.json({
+    photo,
+    });
+  })
+);
 
 
 module.exports = router;
