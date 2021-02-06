@@ -112,6 +112,8 @@ export default function AboutMeLeft() {
     return state.session.user;
   });
 
+  console.log(loggedInUser)
+
     const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
@@ -141,8 +143,6 @@ export default function AboutMeLeft() {
       setImagePreview(fileReader.result);
     };
   };
-
-  
 
     return (
         <Left>

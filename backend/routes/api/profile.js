@@ -5,25 +5,6 @@ const { singleMulterUpload, singlePublicFileUpload } = require("../../aws3");
 const router = express.Router();
 
 
-// get user
-router.get(
-  "/:id",
-  asyncHandler(async (req, res) => {
-
-    const userId = req.params.id;
-
-    // const user = await User.findOne({where: {
-    //   userId
-    // }});
-    const user = await User.findOne(userId);
-
-    if(!user) {
-        return res.json({ msg: 'There is no user' });
-    }
-
-    res.json({user: user});
-  })
-);
 
 // update profile pic
 router.put(
