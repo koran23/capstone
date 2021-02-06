@@ -28,8 +28,9 @@ export default function CommentFormContainer({selectedImg}) {
         <CommentContainer>
         <div>
             <CommentForm selectedImg={selectedImg}/>
-            
+            <div classnmae='comments-scroll'>
             <CommentFormItem selectedImg={selectedImg}/>
+            </div>
             </div>
   
         </CommentContainer>

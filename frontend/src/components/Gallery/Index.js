@@ -47,20 +47,20 @@ const ImgGrid = styled.div`
   }
 
   a {
-  flex-direction: column;
-  img:hover {
-    cursor: pointer;
-  }
+    flex-direction: column;
+    img:hover {
+      cursor: pointer;
+    }
 
-	img {
-		box-shadow: 0 1px 1px 2px rgba(0,0,0, .15);
-		border-radius: 2px;
-  }
+    img {
+      box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+    }
 
-  display: inline-block;
-  margin-bottom: 12px;
-  width: 100%;
-}
+    display: inline-block;
+    margin-bottom: 12px;
+    width: 100%;
+  }
 
   a:hover {
     opacity: 0.9;
@@ -110,7 +110,6 @@ const ImgGrid = styled.div`
       width: 100%;
       border-radius: 50%;
       vertical-align: baseline;
-      
     }
 
     a {
@@ -185,23 +184,22 @@ const ImgGrid = styled.div`
 const ImageGrid = ({ setSelectedImg, selectedImg }) => {
   const dispatch = useDispatch();
 
+  // Generate random prompts???
+  // var item = items[Math.floor(Math.random() * items.length)];
+
   const currentPhotos = useSelector((fullReduxState) => {
     return fullReduxState.gallery.photo;
   });
-
 
   // console.log(selectedImg.id);
 
   const loggedInUser = useSelector((store) => store.session.user);
 
-  
-
-
   useEffect(async () => {
     // Request to the server.
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
-    dispatch(fetchAllPhotos({userId: loggedInUser.id}));
+    dispatch(fetchAllPhotos({ userId: loggedInUser.id }));
   }, []);
 
   return (
@@ -214,7 +212,6 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                 {currentPhotos &&
                   currentPhotos.map((doc) => (
                     <motion.div
-                      
                       layout
                       whileHover={{ opacity: 1 }}
                       s
@@ -242,6 +239,9 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                         <motion.img
                           src={doc.url}
                           alt="uploaded pic"
+                          // options={{
+                          //   fillWidth: true,
+                          // }}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 1 }}

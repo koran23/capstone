@@ -38,12 +38,12 @@ const Comments = styled.div`
     flex-direction: column;
     color: gray;
     font-family: "Barlow Semi Condensed";
-    // position: absolute;
-    // width: 91%;
-    // height: 430px;
-    // top: 70%;
-    // left: 46%;
-    // -webkit-transform: translate(-50%, -50%);
+     /* position: absolute; */
+     /* width: 91%; */
+     /* height: 430px; */
+     /* top: 70%; */
+     /* left: 46%; */
+     /* -webkit-transform: translate(-50%, -50%); */
     background-color: white;
     // border: 1px solid gray;
     border-radius: 5px;
@@ -283,12 +283,14 @@ const currentComments = [selectedImg]
           {/* {this.renderLikes()} */}
           <div className="comment-form-container">
             <form className="comment-form" onSubmit={onSubmit}>
+              <div className='comments-scroll'>
               {/* {this.renderComments()} */}
               {!currentComments && <h3>Loading...</h3>}
               {currentComments &&
                 currentComments.map((comment) => {
                   return <Comment theComment={comment} />;
                 })}
+                </div>
               <div className="comment-div">
                 <input
                   type="text"
@@ -300,6 +302,7 @@ const currentComments = [selectedImg]
                 />
                 <br />
               </div>
+              
             </form>
           </div>
         </div>
