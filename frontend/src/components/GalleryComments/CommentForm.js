@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/gallery";
@@ -146,6 +146,18 @@ const Comments = styled.div`
     background-color: white;
     // color: white;
   }
+  .like-button-liked {
+    text-shadow: 0px 0px 1px red, 0px 0px 1px red;
+    font-size: 18px;
+    width: 7%;
+    margin-top: 10px;
+    margin-left: 10px;
+    left: 10%;
+    border: none;
+    color: red;
+    background-color: white;
+    // color: white;
+  }
 
   .comment-username {
     margin-left: 7px;
@@ -185,13 +197,11 @@ const Comments = styled.div`
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
-  const [like, setLike] = useState('false');
+  const [like, setLike] = useState(false);
   const loggedInUser = useSelector((store) => store.session.user);
   let likeButtonText = <i className="fa fa-heart" aria-hidden="true"></i>;
 
 const currentComments = [selectedImg]
-console.log(selectedImg)
-  console.log(currentComments)
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -210,20 +220,33 @@ console.log(selectedImg)
 
   const onLike = (e) => {
     e.preventDefault();
+    setLike(!like)
+
+     const payload = {
+    photoId: selectedImg.id,
+    userId: loggedInUser.id,
+    like
+  };
 
     console.log(selectedImg)
-    if (like == 'false') setLike('true');
-    if (like == 'true') setLike('false');
-    console.log(like)
-
-    const payload = {
-      photoId: selectedImg.id,
-      userId: loggedInUser.id,
-      like
-    };
-
-    dispatch(likePhoto(payload))
+    dispatch(likePhoto(payload));
+    
   }
+  
+ 
+
+  // useEffect(async () => {
+  //   // Request to the server.
+  //   // const response = await fetch("/api/bands");
+  //   // setBands(response.data.bands);
+    
+  // }, [setLike]);
+
+
+
+  //  if (selectedImg.like = true) {
+  //      likeButtonText = <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>;
+  //   }
 
 
   const Comment = ({theComment}) => {

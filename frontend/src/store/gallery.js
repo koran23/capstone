@@ -75,10 +75,9 @@ export const createComment = (comment) => async (dispatch) => {
   dispatch(setComment(res.data.comment));
 };
 export const likePhoto = (liked) => async (dispatch) => {
-  const { photoId, like, userId} = liked;
+  const {photoId, like} = liked
   console.log(liked)
-
-  const res = await fetch(`/api/gallery/like/${userId}`, {
+  const res = await fetch(`/api/gallery/like/`, {
     method: "PATCH",
      headers: {
       "Content-Type": "application/json",
@@ -86,7 +85,6 @@ export const likePhoto = (liked) => async (dispatch) => {
     body: JSON.stringify(liked),
 
   });
-  console.log(res.data.liked)
   dispatch(setLike(res.data.liked));
 };
 
