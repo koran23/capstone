@@ -7,7 +7,7 @@ import { fetchAllComments } from "../../store/posts";
 
 const CommentSection = styled.div`
 .delete-comment {
-  font-size: 15px;
+  font-size: 10px;
   border: none;
   background-color: white;
 }
@@ -89,15 +89,15 @@ export default function CommentFormItem({username, userId, comment, selectedImg}
     <div>
       <div className="comments-section">
         <div className="comment-owner-body">
-          {/* <Link to={`/users/${comment.owner_id}/photos`}>
-            {comment.username}
-          </Link> */}
+          {/* <div >
+            {loggedInUser.username}
+          </div> */}
           <div className="comment-body-and-delete">
             <p>{comment}</p>
             <span>{deleteCommentButton()}</span>
           </div>
         </div>
-        {/* <span>{comment.created} ago</span> */}
+        {/* <span>{comment.createdAt} ago</span> */}
       </div>
     </div>
     </CommentSection>

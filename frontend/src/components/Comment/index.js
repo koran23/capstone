@@ -22,6 +22,8 @@ const CommSec = styled.div`
 .delete-comment {
   font-size: 15px;
   border: none;
+  background-color: white;
+  font-size: 10px;
 }
 
 .delete-comment:hover {

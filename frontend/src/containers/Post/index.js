@@ -8,8 +8,10 @@ import Comment from '../../components/Comment/index'
 const PostStyle = styled.div`
 
   .post {
+    /* display: flex; */
     background-color: ${(props) => props.theme.white};;
-    max-width: 600px;
+    max-width: 400px;
+    margin-bottom: 40px;
     width: 100vw;
     padding: 16px;
     border-radius: 30px;
@@ -49,6 +51,10 @@ const PostStyle = styled.div`
     object-fit: cover;
     margin: 16px 0px;
     border-radius: 30px;
+  }
+  .votes_count {
+    border: none;
+    background-color: white;
   }
 `;
 
@@ -94,11 +100,11 @@ const dispatch = useDispatch();
           </p>
         </div>
         <div className="votes">
-				<span className="angle_up">▲</span>
 				<button
 					className="votes_count"
 					// onClick={() => product.updateCount(product.id)}
 				>
+          <span className="angle_up">▲</span>
 					{/* {product.votes_count} */}
 				</button>
 			</div>
