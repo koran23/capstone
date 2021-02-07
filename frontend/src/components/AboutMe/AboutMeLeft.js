@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {editProfile} from '../../store/profile'
 
 const Left = styled.div`
+
 .about-left{
     background: ${(props) => props.theme.bg};;
     display: flex;
@@ -100,6 +101,32 @@ const Left = styled.div`
     background: #edffec;
     color: #000;
 }
+  label input {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  label {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    margin: 10px auto;
+    line-height: 30px;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 24px;
+  }
+  label:hover {
+    background: var(--primary);
+    color: white;
+  }
+    .imgPreview {
+    width: auto;
+    height: 25px;
+    border-radius: 50%;
+  }
 `
 
 export default function AboutMeLeft() {

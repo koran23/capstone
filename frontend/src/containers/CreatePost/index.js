@@ -57,6 +57,11 @@ const Upload = styled.div`
       color: var(--error);
     }
   }
+      .imgPreview {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+  }
 `;
 
 export default function CreatePost() {

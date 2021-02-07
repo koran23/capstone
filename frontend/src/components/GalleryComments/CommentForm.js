@@ -169,7 +169,7 @@ const Comments = styled.div`
   }
 
   .delete-comment {
-    font-size: 15px;
+    font-size: 10px;
   }
 
   .delete-comment:hover {

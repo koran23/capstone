@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link, Redirect} from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import CommentFormContainer from '../GalleryComments/CommentFormContainer'
@@ -112,13 +114,13 @@ const Mod = styled.div`
 `
 
 const Modal = ({ setSelectedImg, selectedImg }) => {
+   const loggedInUser = useSelector((store) => store.session.user);
 
   
   const handleClick = (e) => {
     // window.location.href = '/post'
-    if (e.target.classList.contains('photo-show-div')) {
       setSelectedImg(null);
-    }
+      Redirect(`/gallery/${loggedInUser.id}`)
   }
   
   console.log(selectedImg)
@@ -126,16 +128,16 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
   
   return (
       <Mod>
-        <div className='ReactModal__Overlay ReactModal__Overlay--after-open photo-show-overlay'>
+        <div  className='ReactModal__Overlay ReactModal__Overlay--after-open photo-show-overlay'>
         <div className='ReactModal__Content ReactModal__Content--after-open modal-photo-show'>
         <div className='photo-comment-div'>
 
-    <motion.div onClick={handleClick}
+    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <div className='photo-show-div'>
-      <motion.img  src={selectedImg.url} alt="enlarged pic" 
+      <div onClick={handleClick} className='photo-show-div'>
+      <motion.img src={selectedImg.url} alt="enlarged pic" 
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
       />

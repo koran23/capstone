@@ -222,16 +222,16 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                       <a>
                         <div className="username-display">
                           <div className="photo-index-user">
-                            <Link to={`/`}>
+                            <Link to={`/about-me`}>
                               <img
                                 src={
-                                  "https://yt3.ggpht.com/ytc/AAUvwnh1sZ8Y0mGlhOcdNor1ic3mn4NtTZsA6szvWSBKFw=s900-c-k-c0x00ffffff-no-rj"
+                                  loggedInUser.profilePic
                                 }
                               />
                             </Link>
                           </div>
                           <div className="photo-index-username">
-                            <Link to={`/`} className="username">
+                            <Link to={`/about-me`} className="username">
                               {loggedInUser.username}
                             </Link>
                           </div>
