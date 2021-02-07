@@ -3,8 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
     picture: DataTypes.STRING,
     caption: DataTypes.STRING,
-    vote: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
   }, {});
   Post.associate = function(models) {
     // associations can be defined here
@@ -12,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
     });
      Post.hasMany(models.Comment, {
+      foreignKey: "postId",
+    });
+     Post.hasMany(models.Vote, {
       foreignKey: "postId",
     });
   };

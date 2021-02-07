@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { confirmAlert } from "react-confirm-alert";
-import ChatHeader from "./ChatHeader.js";
-import Message from "../Message/Message";
 import styled from "styled-components";
 
 const Chatdiv = styled.div`
@@ -48,37 +46,14 @@ const Chatdiv = styled.div`
   }
 `;
 
-const modalDiv = styled.div`
-  .react-confirm-alert-overlay {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  .react-confirm-alert {
-    background: white;
-    width: 80%;
-    padding: 1em;
-  }
-  /* custom alert dialog styles */
-  .add-dialog h3 {
-    margin: 0;
-  }
-  .add-dialog-buttons {
-    float: right;
-  }
-  .add-dialog-buttons button + button {
-    margin-left: 0.5em;
-  }
-`;
 
 function Chat() {
 
   
-
   return (
     <Chatdiv>
       <div className="chat">
-        <ChatHeader />
         <div className="chat__messages">
-          <Message />
         </div>
         <div className="chat__input">
           <form>
@@ -91,7 +66,6 @@ function Chat() {
               Send Message
             </button>
           </form>
-
           <div className="chat__inputIcons"></div>
         </div>
       </div>
