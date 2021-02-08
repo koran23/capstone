@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { confirmAlert } from "react-confirm-alert";
+// import { confirmAlert } from "react-confirm-alert";
 import styled from "styled-components";
 
 const Chatdiv = styled.div`
