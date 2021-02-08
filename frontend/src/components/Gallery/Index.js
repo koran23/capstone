@@ -32,6 +32,7 @@ const ImgGrid = styled.div`
     max-height: 100%;
     opacity: 0.8;
     cursor: pointer;
+    /* transition: 0.5s ease-in-out; */
   }
 
   .tile a {
@@ -44,12 +45,30 @@ const ImgGrid = styled.div`
     /* Could be styles with a responsive technique a like aspect ratio prop, but that is outside the scope of here */
 
     /* background-color: ${(props) => props.theme.bg}; */
+    filter: brightness(0.5) grayscale(100);
   }
+  .tile .liked   {
+    justify-content: center; /* horizontally align portrait image */
+    align-items: center; /* vertically align landscape image */
+
+    /** fixed width, creates a square for our image to live */
+    /* width: 414px;
+    height: 414px; */
+    /* Could be styles with a responsive technique a like aspect ratio prop, but that is outside the scope of here */
+
+    /* background-color: ${(props) => props.theme.bg}; */
+     filter: brightness() grayscale(0);
+  }
+  .tile a:hover {
+      cursor: pointer;
+      /* filter: brightness() grayscale(0); */
+    }
 
   a {
     flex-direction: column;
     img:hover {
       cursor: pointer;
+      /* filter: brightness() grayscale(0); */
     }
 
     img {
@@ -201,6 +220,8 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
     // setBands(response.data.bands);
     dispatch(fetchAllPhotos({ userId: loggedInUser.id }));
   }, []);
+  
+  console.log(currentPhotos)
 
   return (
     <ImgGrid>
@@ -219,7 +240,36 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                         setSelectedImg(doc);
                       }}
                     >
-                      <a>
+                      {doc.like === true ? 
+                      <a className='liked'>
+                        <div className="username-display">
+                          <div className="photo-index-user" >
+                            <Link to={`/about-me`}>
+                              <img 
+                                src={
+                                  loggedInUser.profilePic
+                                }
+                              />
+                            </Link>
+                          </div>
+                          <div className="photo-index-username">
+                            <Link to={`/about-me`} className="username">
+                              {loggedInUser.username}
+                            </Link>
+                          </div>
+                        </div>
+                        <motion.img
+                        
+                          src={doc.url}
+                          alt="uploaded pic"
+                          // options={{
+                          //   fillWidth: true,
+                          // }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1 }}
+                        /> 
+                      </a> :    <a >
                         <div className="username-display">
                           <div className="photo-index-user">
                             <Link to={`/about-me`}>
@@ -237,6 +287,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                           </div>
                         </div>
                         <motion.img
+                        
                           src={doc.url}
                           alt="uploaded pic"
                           // options={{
@@ -245,8 +296,8 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 1 }}
-                        />
-                      </a>
+                        /> 
+                      </a>}
                     </motion.div>
                   ))}
               </div>

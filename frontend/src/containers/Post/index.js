@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CommentInput from "../../components/CommandInput";
-import { fetchAllPosts } from "../../store/posts";
+import { fetchAllPosts, createVote } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
 import Comment from '../../components/Comment/index'
 
@@ -62,20 +62,42 @@ export default function Post() {
 
 const dispatch = useDispatch();
 
+
  const currentPosts = useSelector((fullReduxState) => {
     return fullReduxState.post.post
   });
 
-
-  console.log(currentPosts)
-
   const loggedInUser = useSelector((store) => store.session.user);
 
-  
 
   const Post = ({thePost}) => {
+    const [vote, setVote] = useState(thePost.vote);
 
-      
+     const onVote = (e) => {
+    e.preventDefault(); 
+    setVote((thePost.vote) + 1)
+  //  if (vote === 1) setVote((thePost.vote) - 1)
+ 
+
+     const payload = {
+    postId: thePost.id,
+    userId: loggedInUser.id,
+    vote
+  };
+
+    console.log(thePost.vote)
+    dispatch(createVote(payload));
+    
+  }
+
+  useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    const setVote = () => thePost.vote = thePost.vote + 1;
+    setVote()
+    
+  }, [vote]);
 
     return (
       <PostStyle>
@@ -101,11 +123,12 @@ const dispatch = useDispatch();
         </div>
         <div className="votes">
 				<button
+        onClick={onVote}
 					className="votes_count"
 					// onClick={() => product.updateCount(product.id)}
 				>
           <span className="angle_up">▲</span>
-					{/* {product.votes_count} */}
+					{thePost.vote}
 				</button>
 			</div>
         <CommentInput postId={thePost.id}/>

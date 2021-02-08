@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from 'framer-motion';
@@ -122,6 +122,14 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
       setSelectedImg(null);
       Redirect(`/gallery/${loggedInUser.id}`)
   }
+
+    useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    
+    
+  }, []);
   
   console.log(selectedImg)
   
