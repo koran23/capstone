@@ -14,6 +14,9 @@ module.exports = {
       caption: {
         type: Sequelize.STRING
       },
+      vote: {
+        type: Sequelize.INTEGER
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {model: 'Users'}

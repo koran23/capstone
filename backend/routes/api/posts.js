@@ -1,6 +1,6 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { User, Post, Comment} = require("../../db/models");
+const { User, Post, Comment, Vote} = require("../../db/models");
 const { singleMulterUpload, singlePublicFileUpload } = require("../../aws3");
 const router = express.Router();
 
@@ -71,19 +71,18 @@ router.post(
 
 // Vote on post
 router.patch(
-  '/:id',
+  '/vote/:id',
   asyncHandler(async (req, res, next) => {
-    const userId = req.params.id;
-    const post = await Post.findOne(userId);
+    
+    const { vote, postId } = req.body;
+    const post = await Post.findByPk(postId);
 
     if (post) {
       await post.update({ 
-          vote: req.body.vote,
+          vote: vote,
         });
-      res.json({ vote });
-    } else {
-      res.status(400).json({msg: 'you already voted'})
-    }
+      res.json({ post });
+    } 
   })
 );
 
