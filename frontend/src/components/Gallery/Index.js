@@ -47,7 +47,7 @@ const ImgGrid = styled.div`
     /* background-color: ${(props) => props.theme.bg}; */
     filter: brightness(0.5) grayscale(100);
   }
-  .tile .liked   {
+  .tile .liked  {
     justify-content: center; /* horizontally align portrait image */
     align-items: center; /* vertically align landscape image */
 
@@ -61,19 +61,20 @@ const ImgGrid = styled.div`
   }
   .tile a:hover {
       cursor: pointer;
-      /* filter: brightness() grayscale(0); */
+      filter: brightness() grayscale(0);
     }
 
   a {
     flex-direction: column;
     img:hover {
       cursor: pointer;
-      /* filter: brightness() grayscale(0); */
+     
     }
 
     img {
       box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.15);
       border-radius: 2px;
+       filter: brightness() grayscale(0);
     }
 
     display: inline-block;
