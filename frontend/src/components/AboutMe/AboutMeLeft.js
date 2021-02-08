@@ -192,7 +192,7 @@ export default function AboutMeLeft() {
                 <img src = {loggedInUser.profilePic}/>
               </div>
             </div>
-            <h2>Ahdari<br></br>Scott</h2>
+            <h2>{loggedInUser.username}<br></br></h2>
             <h3></h3>
           </div>
           <ul class = "icons">

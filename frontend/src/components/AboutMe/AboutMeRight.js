@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from "react-redux";
 import styled from 'styled-components'
 
 const Right = styled.div`
@@ -66,10 +67,15 @@ const Right = styled.div`
 `
 
 export default function AboutMeRight() {
+
+     const loggedInUser = useSelector((state) => {
+    return state.session.user;
+  });
+
     return (
         <Right>
          <div class = "about-right">
-        <h1>hi<span>!</span></h1>
+        <h1>hi<span>!</span>{loggedInUser.username}</h1>
         <h2>Here's who I am</h2>
         <div class = "about-btns">
           {/* <button type = "button" class = "btn btn-pink">resume</button>
