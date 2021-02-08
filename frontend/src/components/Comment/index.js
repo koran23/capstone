@@ -53,7 +53,6 @@ const CommSec = styled.div`
 
 export default function Comment({ id, username, caption }) {
   const loggedInUser = useSelector((store) => store.session.user);
-  console.log(id);
 
   const deleteCommentButton = () => {
     const deleteButton = (

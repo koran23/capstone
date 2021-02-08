@@ -3,6 +3,7 @@ import { fetch } from "./csrf";
 const GET_POSTS = "profile/GET_POSTS";
 const CREATE_POST = "profile/CREATE_POST";
 const CREATE_COMMENT = "profile/CREATE_COMMENT";
+const CREATE_VOTE = "profile/CREATE_VOTE";
 const GET_COMMENTS = "profile/GET_COMMENTS";
 
 //Action Creators
@@ -17,6 +18,10 @@ const setPost = (post) => ({
 const setComment = (comment) => ({
   type: CREATE_COMMENT,
   comment: comment
+})
+const setVote = (vote) => ({
+  type: CREATE_COMMENT,
+  vote: vote
 })
 const getComments = (comment) => ({
   type: GET_COMMENTS,
@@ -69,6 +74,19 @@ export const createComment = (comment) => async (dispatch) => {
   });
   dispatch(setComment(res.data.comment));
 };
+export const createVote = (upVote) => async (dispatch) => {
+  const { vote, userId, postId } = upVote;
+
+  const res = await fetch(`/api/posts/vote/${userId}`, {
+    method: "PATCH",
+     headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(upVote),
+
+  });
+  dispatch(setVote(res.data.upVote));
+};
 
 export const fetchAllComments = () => async (dispatch) => {
   const res = await fetch(`/api/posts/comments/`);
@@ -92,6 +110,8 @@ const postReducer = (state = initialState, action) => {
       return { ...state, post: action.payload };
     case CREATE_COMMENT:
       return { ...state, comment: action.payload };
+    case CREATE_VOTE:
+      return { ...state, vote: action.payload };
     case GET_POSTS:
       newState = action.post;
       return {...initialState,

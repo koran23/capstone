@@ -189,7 +189,7 @@ export default function AboutMeLeft() {
             </form>
             <div class = "shadow">
               <div class = "about-img">
-                <img src = {loggedInUser.profilePic} alt = "about image"/>
+                <img src = {loggedInUser.profilePic}/>
               </div>
             </div>
             <h2>Ahdari<br></br>Scott</h2>

@@ -221,14 +221,14 @@ const currentComments = [selectedImg]
   const onLike = (e) => {
     e.preventDefault();
     setLike(!like)
+    const setLikedImg = () => selectedImg.like = like
+    setLikedImg()
 
      const payload = {
     photoId: selectedImg.id,
     userId: loggedInUser.id,
     like
   };
-
-    console.log(selectedImg)
     dispatch(likePhoto(payload));
     
   }
@@ -239,9 +239,6 @@ const currentComments = [selectedImg]
     // Request to the server.
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
-    const setLikedImg = () => selectedImg.like = like
-    setLikedImg()
-    
   }, [like]);
 
 
