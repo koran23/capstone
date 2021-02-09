@@ -2,6 +2,7 @@ import { fetch } from "./csrf";
 
 const GET_PROFILE = "profile/GET_PROFILE";
 const CREATE_PROFILE = "profile/CREATE_PROFILE";
+const CREATE_SOCIAL = "profile/CREATE_SOCIAL";
 const REMOVE_PROFILE = "profile/REMOVE_PROFILE";
 
 
@@ -13,6 +14,10 @@ const getProfile = (profile) => ({
 const setProfile = (profilePic) => ({
   type: CREATE_PROFILE,
   profilePic: profilePic
+});
+const setSocial = (social) => ({
+  type: CREATE_SOCIAL,
+  social: social
 });
 const removeProfile = (profile) => ({
   type: REMOVE_PROFILE,
@@ -55,6 +60,22 @@ export const editProfile = (profilePic) => async (dispatch) => {
   dispatch(setProfile(res.data.profilePic));
 };
 
+export const editSocial = (social) => async (dispatch) => {
+    const { facebook, twitter, linkden, instagram, userId } = social;
+
+  // for single file
+
+  const res = await fetch(`/api/profile/social/${userId}`, {
+    method: "PUT",
+     headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(social),
+  });
+
+  dispatch(setSocial(res.data.social));
+};
+
 export const createProfile = (body) => async (dispatch) => {
   const res = await fetch(`/api/profile/`, {
     method: "POST",
@@ -72,7 +93,8 @@ export const createProfile = (body) => async (dispatch) => {
 
 const initialState = {
   profile: null,
-  profilePic: null
+  profilePic: null,
+  social: null
 };
 
 //Reducer
@@ -85,6 +107,8 @@ const profileReducer = (state = initialState, action) => {
       };
     case CREATE_PROFILE:
       return { ...state, profilePic: action.payload };
+    case CREATE_SOCIAL:
+      return { ...state, social: action.payload };
     case REMOVE_PROFILE:
       return {
         ...state,

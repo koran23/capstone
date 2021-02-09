@@ -28,6 +28,25 @@ router.put(
   })
 );
 
+router.put(
+  '/social/:userId',
+  asyncHandler(async (req, res, next) => {
+    const {userId, twitter, facebook, linkden, instagram} = req.body;
+    const user = await User.findByPk(userId);
+    if (user) await user.update({
+      userId: userId,
+      twitter: twitter,
+      facebook: facebook,
+      linkden: linkden,
+      instagram: instagram
+    });
+
+    return res.json({
+    user,
+    });
+  })
+);
+
 // // update aboutMe
 // router.patch(
 //   '/:userId',

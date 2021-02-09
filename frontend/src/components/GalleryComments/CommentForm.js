@@ -206,7 +206,7 @@ const currentComments = [selectedImg]
   const onSubmit = (e) => {
     e.preventDefault();
     //  window.location.href = '/pic';
-
+  
     const payload = {
       photoId: selectedImg.id,
       userId: loggedInUser.id,

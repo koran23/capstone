@@ -15,6 +15,7 @@ import ImageGrid from "./components/Gallery/Index";
 import Modal from "./components/Gallery/Modal";
 import Splash from "./components/Splash";
 import AboutMeContainer from "./containers/AboutMeContainer";
+import EditSocialPage from "./components/EditSocialPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,9 @@ function App() {
             </Route>
             <Route path="/about-me" exact>
               <AboutMeContainer />
+            </Route>
+            <Route path="/social/:userId" exact>
+              <EditSocialPage />
             </Route>
             <Route path="/gallery/:userId">
               {/* <UploadForm/> */}
