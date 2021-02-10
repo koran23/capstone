@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/gallery";
-import { likePhoto } from "../../store/gallery";
+import { likePhoto, fetchAllComments } from "../../store/gallery";
 import CommentFormItem from '../../components/GalleryComments/CommentFormItem'
 // import { useState } from "react";
 
@@ -198,13 +198,16 @@ export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
   const [like, setLike] = useState(false);
+  const [edits, setEdits] = useState([]);
   const loggedInUser = useSelector((store) => store.session.user);
   let likeButtonText = <i className="fa fa-heart like-button" aria-hidden="true"></i>;
 
 const currentComments = [selectedImg]
+console.log(selectedImg)
 
   const onSubmit = (e) => {
     e.preventDefault();
+    
     //  window.location.href = '/pic';
   
     const payload = {
@@ -212,11 +215,12 @@ const currentComments = [selectedImg]
       userId: loggedInUser.id,
       edit,
     };
-    console.log(payload);
-
+    
     dispatch(createComment(payload));
+    dispatch(fetchAllComments(selectedImg.id));
     // history.push(`/gallery`);
   };
+
 
   const onLike = (e) => {
     e.preventDefault();
@@ -230,35 +234,43 @@ const currentComments = [selectedImg]
     like
   };
     dispatch(likePhoto(payload));
-    
   }
   
- 
-
-  useEffect(async () => {
+  useEffect(() => {
     // Request to the server.
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
   }, [like]);
 
 
+    useEffect(() => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    dispatch(fetchAllComments(selectedImg.id));
+  }, [dispatch, selectedImg.id]);
+
+  
 
    if (selectedImg.like == true) {
        likeButtonText = <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>;
     }
 
+    
+    const Comment = () => {
+    const comments = useSelector((store) => store.gallery.comments);
 
-  const Comment = ({theComment}) => {
+    
+
     return (
-      
-      <div>{theComment.Comments ? (
-          theComment.Comments.map((comment) => (
+      <div>{comments.length ? (
+          comments.map((comment) => {
+            if (comment) return (
             <CommentFormItem username={loggedInUser.username} userId={comment.userId} comment={comment.comment} />
-          ))
+          )})
         ) : (
           <></>
-        )}</div>
-        
+        )}</div>     
     )
   }
 
@@ -282,11 +294,7 @@ const currentComments = [selectedImg]
             <form className="comment-form" onSubmit={onSubmit}>
               <div className='comments-scroll'>
               {/* {this.renderComments()} */}
-              {!currentComments && <h3>Loading...</h3>}
-              {currentComments &&
-                currentComments.map((comment) => {
-                  return <Comment theComment={comment} />;
-                })}
+                <Comment/>              
                 </div>
               <div className="comment-div">
                 <input

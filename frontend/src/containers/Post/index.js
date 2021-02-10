@@ -3,13 +3,12 @@ import styled from "styled-components";
 import CommentInput from "../../components/CommandInput";
 import { fetchAllPosts, createVote } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
-import Comment from '../../components/Comment/index'
+import Comment from "../../components/Comment/index";
 
 const PostStyle = styled.div`
-
   .post {
     /* display: flex; */
-    background-color: ${(props) => props.theme.white};;
+    background-color: ${(props) => props.theme.white};
     max-width: 400px;
     margin-bottom: 40px;
     width: 100vw;
@@ -28,11 +27,11 @@ const PostStyle = styled.div`
   }
 
   .post__profilePic {
-     width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-right: 1rem;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-right: 1rem;
   }
 
   .post__delete {
@@ -58,49 +57,31 @@ const PostStyle = styled.div`
   }
 `;
 
-export default function Post() {
-
-const dispatch = useDispatch();
-
-
- const currentPosts = useSelector((fullReduxState) => {
-    return fullReduxState.post.post
-  });
-
+const Posts = ({ thePost }) => {
+  const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.session.user);
+  const [vote, setVote] = useState(thePost.vote);
 
+  const onVote = (e) => {
+    e.preventDefault();
+    setVote(thePost.vote + 1);
+    //  if (vote === 1) setVote((thePost.vote) - 1)
 
-  const Post = ({thePost}) => {
-    const [vote, setVote] = useState(thePost.vote);
-
-     const onVote = (e) => {
-    e.preventDefault(); 
-    setVote((thePost.vote) + 1)
-  //  if (vote === 1) setVote((thePost.vote) - 1)
- 
-
-     const payload = {
-    postId: thePost.id,
-    userId: loggedInUser.id,
-    vote
+    const payload = {
+      postId: thePost.id,
+      userId: loggedInUser.id,
+      vote,
+    };
+    dispatch(createVote(payload));
   };
 
-    console.log(thePost.vote)
-    dispatch(createVote(payload));
-    
-  }
-
-  useEffect(async () => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
-    const setVote = () => thePost.vote = thePost.vote + 1;
-    setVote()
-    
-  }, [vote]);
-
-    return (
-      <PostStyle>
+  const User = {
+    caption: "Yerrrr!",
+    username: "Segen Shoots",
+  };
+  console.log('!!!!!!!!!!!!!!!!!!!!')
+  return (
+    <PostStyle>
       <div className="post">
         <div className="post__header">
           <div className="post__headerLeft">
@@ -122,49 +103,51 @@ const dispatch = useDispatch();
           </p>
         </div>
         <div className="votes">
-				<button
-        onClick={onVote}
-					className="votes_count"
-					// onClick={() => product.updateCount(product.id)}
-				>
-          <span className="angle_up">▲</span>
-					{thePost.vote}
-				</button>
-			</div>
-        <CommentInput postId={thePost.id}/>
+          <button
+            onClick={onVote}
+            className="votes_count"
+            // onClick={() => product.updateCount(product.id)}
+          >
+            <span className="angle_up">▲</span>
+            {thePost.vote}
+          </button>
+        </div>
+        <CommentInput postId={thePost.id} />
         {thePost.Comments ? (
-          thePost.Comments.map((comment) => (
-            <Comment username={User.username} id={comment.userId} caption={comment.comment} />
-          ))
+          thePost.Comments.map((comment) => {
+            console.log('??????????????????????')
+            return <Comment
+              username={User.username}
+              id={comment.userId}
+              caption={comment.comment}
+            />
+          })
         ) : (
           <></>
         )}
       </div>
     </PostStyle>
-    )
-  }
- 
+  );
+};
+
+export default function Post() {
+  const dispatch = useDispatch();
+
+  const currentPosts = useSelector((fullReduxState) => {
+    return fullReduxState.post.post;
+  });
+
   useEffect(async () => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
     dispatch(fetchAllPosts());
-  }, []);
-
-
-  const User = {
-    caption: "Yerrrr!",
-    username: "Segen Shoots",
-  };
-
+  }, [dispatch]);
 
   return (
-     <div>
+    <div>
       <br></br>
       {!currentPosts && <h3>Loading...</h3>}
       {currentPosts &&
         currentPosts.map((post) => {
-          return <Post thePost={post} />
+          return <Posts thePost={post} />;
         })}
     </div>
   );

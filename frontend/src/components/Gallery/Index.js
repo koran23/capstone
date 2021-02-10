@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPhotos } from "../../store/gallery";
+import { fetchAllPhotos, unloadGallery } from "../../store/gallery";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
@@ -153,7 +153,7 @@ const ImgGrid = styled.div`
     padding-top: 9px;
   }
 
-  @media only screen and (-webkit-min-width: 600px) {
+  /* @media only screen and (-webkit-min-width: 600px) {
     .index-sub-display {
       column-count: 2;
       -moz-column-count: 2;
@@ -175,7 +175,7 @@ const ImgGrid = styled.div`
       -moz-column-count: 4;
       -webkit-column-count: 4;
     }
-  }
+  } */
   @media only screen and (min-width: 600px) {
     .index-sub-display {
       column-count: 2;
@@ -214,12 +214,15 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
   // console.log(selectedImg.id);
 
   const loggedInUser = useSelector((store) => store.session.user);
+  
 
   useEffect(async () => {
     // Request to the server.
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
+
     dispatch(fetchAllPhotos({ userId: loggedInUser.id }));
+   
   }, []);
   
   console.log(currentPhotos)

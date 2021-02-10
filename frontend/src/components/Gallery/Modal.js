@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
+import { unloadGallery } from "../../store/gallery";
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import CommentFormContainer from '../GalleryComments/CommentFormContainer'
@@ -115,6 +116,7 @@ const Mod = styled.div`
 
 const Modal = ({ setSelectedImg, selectedImg }) => {
    const loggedInUser = useSelector((store) => store.session.user);
+   const dispatch = useDispatch();
 
   
   const handleClick = (e) => {
@@ -128,7 +130,9 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
     
-    
+     return () => {
+      dispatch(unloadGallery())
+    }
   }, []);
   
   console.log(selectedImg)

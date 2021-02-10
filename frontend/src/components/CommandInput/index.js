@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { createComment } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,6 +48,13 @@ export default function CommentInput({postId}) {
     dispatch(createComment(payload));
     // history.push(`/gallery`);
   };
+
+  useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    setComm(comm)
+  }, []);
 
   return (
     <Comment>

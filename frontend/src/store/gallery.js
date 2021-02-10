@@ -4,6 +4,8 @@ const GET_GALLERY = "profile/GET_GALLERY";
 const CREATE_GALLERY = "profile/CREATE_GALLERY";
 const CREATE_COMMENT = "profile/CREATE_COMMENT";
 const CREATE_LIKE = "profile/CREATE_LIKE";
+const GET_COMMENTS = "profile/GET_COMMENTS";
+const UNLOAD = "profile/UNLOAD";
 
 //Action Creators
 const getGallery = (photo) => ({
@@ -22,12 +24,18 @@ const setLike = (like) => ({
   type: CREATE_LIKE,
   like: like
 })
+const getComments = (comments) => ({
+  type: GET_COMMENTS,
+  comments: comments
+})
+export const unloadGallery = () => ({
+  type: UNLOAD,
+})
 
 
 //Thunks
 export const fetchAllPhotos = (userId) => async (dispatch) => {
   const res = await fetch(`/api/gallery/${userId}`);
-  // const venues = await res.json();
   console.log(res.data.photos)
 
   if (res.ok) {
@@ -35,13 +43,13 @@ export const fetchAllPhotos = (userId) => async (dispatch) => {
   }
 };
 
-export const fetchAllComments = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/gallery/${userId}`);
+export const fetchAllComments = (photoId) => async (dispatch) => {
+  const res = await fetch(`/api/gallery/${photoId}/comments`);
   // const venues = await res.json();
-  console.log(res.data.photos)
+  console.log(res.data.comments)
 
   if (res.ok) {
-    dispatch(getGallery(res.data.photos));
+    dispatch(getComments(res.data.comments));
   }
 };
 
@@ -72,8 +80,9 @@ export const createComment = (comment) => async (dispatch) => {
     body: JSON.stringify(comment),
 
   });
-  dispatch(setComment(res.data.comment));
+  dispatch(setComment(comment));
 };
+
 export const likePhoto = (liked) => async (dispatch) => {
   const {photoId, like} = liked
   console.log(liked)
@@ -91,6 +100,7 @@ export const likePhoto = (liked) => async (dispatch) => {
 const initialState = {
   photo: null,
   comment: null,
+  comments: [],
   like: null,
 };
 
@@ -104,10 +114,16 @@ const galleryReducer = (state = initialState, action) => {
       newState = action.photo;
       return {...initialState,
         photo: newState};
+     case GET_COMMENTS:
+      newState = action.comments;
+      return {...state,
+        comments: newState};
     case CREATE_COMMENT:
-      return { ...state, comment: action.payload };
+      return { ...state, comments: [...state.comments, action.payload] };
     case CREATE_LIKE:
       return { ...state, like: action.payload };
+    case UNLOAD:
+      return { ...state, comments: []};
     default:
       return state;
   }

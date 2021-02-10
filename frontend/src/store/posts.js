@@ -30,13 +30,13 @@ const getComments = (comment) => ({
 
 
 
-//Thunks
+// Thunks
 export const fetchAllPosts = () => async (dispatch) => {
   const res = await fetch(`/api/posts`);
   // const venues = await res.json();
-  console.log(res.data.posts)
-
+  // console.log(res)
   if (res.ok) {
+    
     dispatch(getPosts(res.data.posts));
   }
 };
@@ -100,6 +100,7 @@ export const fetchAllComments = () => async (dispatch) => {
 
 const initialState = {
   post: null,
+  comment: null
 };
 
 //Reducer

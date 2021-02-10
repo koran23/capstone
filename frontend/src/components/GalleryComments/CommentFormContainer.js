@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useDispatch} from "react-redux";
+import { unloadGallery } from "../../store/gallery";
 import CommentFormItem from '../GalleryComments/CommentFormItem'
 import CommentForm from '../GalleryComments/CommentForm'
 import styled from 'styled-components';
@@ -23,6 +25,7 @@ const CommentContainer = styled.div`
 
 
 export default function CommentFormContainer({selectedImg}) {
+
     console.log(selectedImg)
     return (
         <CommentContainer>

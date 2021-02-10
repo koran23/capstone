@@ -10,9 +10,12 @@ const router = express.Router();
 router.get(
   "/:userId",
   asyncHandler(async (req, res) => {
-    // const userId = req.params.userId;
+    const userId = req.params.userId;
 
     const photos = await Photo.findAll({
+      // where: {
+      //   userId
+      // },
       include: [
         {
           model: Comment,
@@ -23,6 +26,19 @@ router.get(
     });
 
     res.json({ photos: photos });
+  })
+);
+
+router.get(
+  "/:photoId/comments",
+  asyncHandler(async (req, res) => {
+    const {userId, photoId} = req.params;
+
+    const comments = await Comment.findAll({
+      where: {photoId},
+    });
+
+    res.json({ comments: comments });
   })
 );
 

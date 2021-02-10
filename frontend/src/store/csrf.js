@@ -10,7 +10,13 @@ export async function fetch(url, options = {}) {
   // "application/json", and set the "XSRF-TOKEN" header to the value of the
   // "XSRF-TOKEN" cookie
   if (options.method.toUpperCase() !== "GET") {
-    if (url == "/api/session") {
+    // if (url == "/api/session") {
+    //   options.headers["Content-Type"] =
+    //     options.headers["Content-Type"] || "application/json";
+    // }
+    if (options.headers['Content-Type'] === 'multipart/form-data') {
+      delete options.headers['Content-Type']
+    } else {
       options.headers["Content-Type"] =
         options.headers["Content-Type"] || "application/json";
     }
