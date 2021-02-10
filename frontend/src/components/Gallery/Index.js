@@ -136,29 +136,6 @@ const ImgGrid = styled.div`
     padding-top: 9px;
   }
 
-  /* @media only screen and (-webkit-min-width: 600px) {
-    .index-sub-display {
-      column-count: 2;
-      -moz-column-count: 2;
-      -webkit-column-count: 2;
-    }
-  }
-
-  @media only screen and (-webkit-min-width: 1000px) {
-    .index-sub-display {
-      column-count: 3;
-      -moz-column-count: 3;
-      -webkit-column-count: 3;
-    }
-  }
-
-  @media only screen and (-webkit-min-width: 1500px) {
-    .index-sub-display {
-      column-count: 4;
-      -moz-column-count: 4;
-      -webkit-column-count: 4;
-    }
-  } */
   @media only screen and (min-width: 600px) {
     .index-sub-display {
       column-count: 2;
