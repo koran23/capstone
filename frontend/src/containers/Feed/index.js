@@ -3,6 +3,7 @@ import {Post} from '../index'
 import styled from 'styled-components';
 
 const FeedStyle = styled.div`
+
 .feed {
     display: flex;
     flex-direction: column;
@@ -11,9 +12,6 @@ const FeedStyle = styled.div`
 }
 `
 
-// const deletePost = () => {
-
-// }
 
 export default function Feed() {
     return (

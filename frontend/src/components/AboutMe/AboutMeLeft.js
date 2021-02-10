@@ -14,7 +14,7 @@ const Left = styled.div`
     height: 100vh;
 }
 .about-left-content > div{
-    background: ${(props) => props.theme.green};
+    background: ${(props) => props.theme.gray};
     padding: 4rem 4rem 2.5rem 5rem;
     text-align: center;
 }
