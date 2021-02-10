@@ -1,15 +1,19 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
 	html {
 		font-size: 12px;
 		box-sizing: border-box;
+		background-color: #fafafa;
+       
 	}
 
 	*, *:before, *:after {
 		padding: 0;
 		margin: 0;
 		box-sizing: inherit;
+		
 	}
 
 	body {
@@ -18,6 +22,9 @@ const GlobalStyle = createGlobalStyle`
 		color: ${(props) => props.theme.primaryColor};
 		background-color: ${(props) => props.theme.bg};
 		line-height: 1.8;
+		 opacity: 0.85;
+  		background-image: radial-gradient(#383838 .5px, #fafafa .73px);
+  		background-size: 20px 20px;
 	}
 
 	h1, h2, h3, h4, h5, h6 {

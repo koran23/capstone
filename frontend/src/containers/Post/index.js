@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Comment from "../../components/Comment/index";
 
 const PostStyle = styled.div`
+
   .post {
     /* display: flex; */
     background-color: ${(props) => props.theme.white};
@@ -75,11 +76,19 @@ const Posts = ({ thePost }) => {
     dispatch(createVote(payload));
   };
 
+   useEffect(async () => {
+    // Request to the server.
+    // const response = await fetch("/api/bands");
+    // setBands(response.data.bands);
+    const setVote = () => thePost.vote = thePost.vote + 1;
+    setVote()
+    
+  }, [vote]);
+
   const User = {
     caption: "Yerrrr!",
     username: "Segen Shoots",
   };
-  console.log('!!!!!!!!!!!!!!!!!!!!')
   return (
     <PostStyle>
       <div className="post">
@@ -112,10 +121,9 @@ const Posts = ({ thePost }) => {
             {thePost.vote}
           </button>
         </div>
-        <CommentInput postId={thePost.id} />
+        {/* <CommentInput postId={thePost.id} /> */}
         {thePost.Comments ? (
           thePost.Comments.map((comment) => {
-            console.log('??????????????????????')
             return <Comment
               username={User.username}
               id={comment.userId}
