@@ -34,14 +34,17 @@ export const unloadGallery = () => ({
 
 
 //Thunks
-export const fetchAllPhotos = (userId) => async (dispatch) => {
+export const fetchAllPhotos = (id) => async (dispatch) => {
+  const {userId} = id
   const res = await fetch(`/api/gallery/${userId}`);
+  // const venues = await res.json();
   console.log(res.data.photos)
 
   if (res.ok) {
     dispatch(getGallery(res.data.photos));
   }
 };
+
 
 export const fetchAllComments = (photoId) => async (dispatch) => {
   const res = await fetch(`/api/gallery/${photoId}/comments`);

@@ -6,7 +6,7 @@ export const darkTheme = {
   secondaryColor: "#b2b2b2",
   grey: "#202020",
   darkGrey: "#383838",
-  black: "#121212",
+  black: "#202023",
   red: "#CC0000",
   green: "#4e937a",
   blue: "#0088a9",

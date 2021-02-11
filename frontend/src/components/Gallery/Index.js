@@ -8,14 +8,16 @@ import styled from "styled-components";
 const ImgGrid = styled.div`
   main {
     display: block;
+    
   }
 
   .index-sub-display {
     position: relative;
     column-count: 1;
     column-gap: 1em;
-    width: 100%;
+    width: 60%;
     margin-top: 25px;
+    margin-bottom: 50px;
   }
   .index-photo-display {
     display: flex;
@@ -63,7 +65,6 @@ const ImgGrid = styled.div`
     cursor: pointer;
     filter: brightness() grayscale(0);
   }
-
 
   a:hover {
     opacity: 0.9;

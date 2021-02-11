@@ -16,6 +16,7 @@ import Modal from "./components/Gallery/Modal";
 import Splash from "./components/Splash";
 import AboutMeContainer from "./containers/AboutMeContainer";
 import EditSocialPage from "./components/EditSocialPage";
+import SinglePhotoPage from './components/SinglePhotoPage'
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function App() {
               <LoginFormPage />
             </Route>
             <Route path="/splash">
-              <Splash />
+              <SinglePhotoPage />
             </Route>
             <Route path="/signup">
               <SignupFormPage />
