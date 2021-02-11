@@ -30,15 +30,13 @@ router.get(
 // Create a post
 router.post(
   "/",
-  singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
-    const {caption, userId} = req.body;
+    const {caption, userId, image} = req.body;
     console.log(req.body)
-    const url = await singlePublicFileUpload(req.file);
     const post = await Post.create({
       caption: caption,
       userId: userId,
-      picture: url
+      picture: image
     });
 
     // setTokenCookie(res, photo);
