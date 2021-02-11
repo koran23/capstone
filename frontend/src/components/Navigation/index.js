@@ -14,10 +14,10 @@ const Bar = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: ${(props) => props.theme.bg};
+  background: #000;
   z-index: 99;
-  padding: 10px 10%;
-  color: ${(props) => props.theme.grey};
+  padding: 20px 10%;
+  color: ${(props) => props.theme.bg};
 
   .list {
     text-decoration: none;

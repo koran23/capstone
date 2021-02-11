@@ -8,14 +8,13 @@ const router = express.Router();
 
 // Get all photos
 router.get(
-  "/:userId",
+  "/:id",
   asyncHandler(async (req, res) => {
-    const userId = req.params.userId;
+    const userId = req.params.id;
 
-    const photos = await Photo.findAll({
-      // where: {
-      //   userId
-      // },
+    const photos = await Photo.findAll({ where: {
+      userId: userId
+    },
       include: [
         {
           model: Comment,

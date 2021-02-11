@@ -22,8 +22,8 @@ const GlobalStyle = createGlobalStyle`
 		color: ${(props) => props.theme.primaryColor};
 		background-color: ${(props) => props.theme.bg};
 		line-height: 1.8;
-		 opacity: 0.85;
-  		background-image: radial-gradient(#383838 .5px, #fafafa .73px);
+		 /* opacity: 0.87; */
+  		background-image: radial-gradient(#383838 .5px, #fafafa .72px);
   		background-size: 20px 20px;
 	}
 
