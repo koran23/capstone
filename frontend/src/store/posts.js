@@ -43,19 +43,13 @@ export const fetchAllPosts = () => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
   const { image, caption, userId } = post;
-  const formData = new FormData();
-  formData.append('caption', caption)
-  formData.append('userId', userId)
-
-  console.log(userId)
-  console.log(caption)
-  // for single file
- if (image) formData.append("image", image);
 
   const res = await fetch(`/api/posts`, {
     method: "POST",
-    // headers: {"Content-Type": "multipart/form-data"},
-    body: formData,
+    //  headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: JSON.stringify(post),
   });
 
   dispatch(setPost(res.data.post));

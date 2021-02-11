@@ -64,11 +64,11 @@ const Upload = styled.div`
   }
 `;
 
-export default function CreatePost() {
+export default function CreatePost({selectedImg}) {
   const [error, setErrors] = useState(null);
   const dispatch = useDispatch();
-  const [imgPreview, setImagePreview] = useState(null);
-  const [image, setImage] = useState({ name: null });
+  const [imgPreview, setImagePreview] = useState(selectedImg.url);
+  const [image, setImage] = useState(selectedImg.url);
   const [caption, setCaption] = useState("");
 
   const loggedInUser = useSelector((state) => {
@@ -90,18 +90,18 @@ export default function CreatePost() {
       });
   };
 
-  const updatePost = (e) => {
-    const file = e.target.files[0];
-    if (file) setImage(file);
+  // const updatePost = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) setImage(file);
 
-    const fileReader = new FileReader();
-    if (file) {
-      fileReader.readAsDataURL(file);
-    }
-    fileReader.onloadend = () => {
-      setImagePreview(fileReader.result);
-    };
-  };
+  //   const fileReader = new FileReader();
+  //   if (file) {
+  //     fileReader.readAsDataURL(file);
+  //   }
+  //   fileReader.onloadend = () => {
+  //     setImagePreview(fileReader.result);
+  //   };
+  // };
 
   return (
     <Upload>
@@ -119,10 +119,6 @@ export default function CreatePost() {
           </div>
           <div>
             <form onSubmit={handleSubmit}>
-              <label>
-                <input type="file" onChange={updatePost} />
-                <span>+</span>
-              </label>
               <img className="imgPreview" src={imgPreview} alt=""></img>
               <br></br>
               <button className="contact-form-btn-upload" type="submit">

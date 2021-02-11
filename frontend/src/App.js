@@ -17,6 +17,7 @@ import Splash from "./components/Splash";
 import AboutMeContainer from "./containers/AboutMeContainer";
 import EditSocialPage from "./components/EditSocialPage";
 import SinglePhotoPage from './components/SinglePhotoPage'
+import CreatePost from './containers/CreatePost/index'
 
 function App() {
   const dispatch = useDispatch();
@@ -46,8 +47,10 @@ function App() {
             <Route path="/posts" exact>
               <Home />
             </Route>
-            <Route path="/chat" exact>
-              <Chat />
+            <Route path="/create-post" exact>
+              {selectedImg && (
+                <CreatePost selectedImg={selectedImg} />
+              )}        
             </Route>
             <Route path="/about-me" exact>
               <AboutMeContainer />

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/gallery";
 import { likePhoto, fetchAllComments } from "../../store/gallery";
 import CommentFormItem from '../../components/GalleryComments/CommentFormItem'
+import CreatePost from '../../containers/CreatePost/index'
+import { Redirect, useHistory } from "react-router-dom";
 // import { useState } from "react";
 
 const Comments = styled.div`
@@ -196,6 +198,7 @@ const Comments = styled.div`
 
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [edit, setEdit] = useState("");
   const [like, setLike] = useState(false);
   const [edits, setEdits] = useState([]);
@@ -220,6 +223,11 @@ console.log(selectedImg)
     dispatch(fetchAllComments(selectedImg.id));
     // history.push(`/gallery`);
   };
+
+  const onClick = (e) => {
+    e.preventDefault()
+    history.push('/create-post')
+  }
 
 
   const onLike = (e) => {
@@ -306,9 +314,10 @@ console.log(selectedImg)
                   placeholder="Edit requests..."
                 />
                 <br />
-              </div>
-              
+              </div>         
             </form>
+            <button onClick={onClick}>post this photo</button>
+            {/* <CreatePost selectedImg={selectedImg}/> */}
           </div>
         </div>
       </div>
