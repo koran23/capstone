@@ -54,6 +54,9 @@ function App() {
             <Route path="/about-me" exact>
               <AboutMeContainer />
             </Route>
+            <Route path="/upload" exact>
+              <UploadForm />
+            </Route>
             <Route path="/social/:userId" exact>
               <EditSocialPage />
             </Route>

@@ -57,14 +57,14 @@ const Upload = styled.div`
       color: var(--error);
     }
   }
-      .imgPreview {
+  .imgPreview {
     width: auto;
     height: 400px;
     /* border-radius: 50%; */
   }
 `;
 
-export default function CreatePost({selectedImg}) {
+export default function CreatePost({ selectedImg }) {
   const [error, setErrors] = useState(null);
   const dispatch = useDispatch();
   const [imgPreview, setImagePreview] = useState(selectedImg.url);
@@ -78,7 +78,15 @@ export default function CreatePost({selectedImg}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    dispatch(createPost({ userId: loggedInUser.id, image, caption }))
+    dispatch(
+      createPost({
+        userId: loggedInUser.id,
+        username: loggedInUser.username,
+        profilePic: loggedInUser.profilePic,
+        image,
+        caption,
+      })
+    )
       .then(() => {
         setImage(null);
       })
@@ -111,7 +119,7 @@ export default function CreatePost({selectedImg}) {
           <div className="createPost__loggedInCenter"> </div>
           <div>
             <textarea
-            value={caption}
+              value={caption}
               onChange={(e) => setCaption(e.target.value)}
               className="createPost__textarea"
               rows="3"

@@ -42,7 +42,7 @@ export const fetchAllPosts = () => async (dispatch) => {
 };
 
 export const createPost = (post) => async (dispatch) => {
-  const { image, caption, userId } = post;
+  const { image, caption, userId, username, profilePic } = post;
 
   const res = await fetch(`/api/posts`, {
     method: "POST",

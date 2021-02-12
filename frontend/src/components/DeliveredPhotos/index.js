@@ -38,7 +38,7 @@ const ImgGrid = styled.div`
     position: relative;
     column-count: 1;
     column-gap: 1em;
-    width: 60%;
+    width: 85%;
     margin-top: 25px;
     margin-bottom: 50px;
   }
@@ -89,9 +89,15 @@ const ImgGrid = styled.div`
     filter: brightness() grayscale(0);
   }
 
+      .image {
+		box-shadow: 0 1px 1px 2px rgba(0,0,0, .15);
+		border-radius: 2px;
+      }
+
   a:hover {
     opacity: 0.9;
   }
+  
 
   @media only screen and (min-width: 600px) {
     .index-sub-display {
@@ -148,6 +154,7 @@ const ImageGridDelivered = ({ setSelectedImg, selectedImg }) => {
                 {currentPhotos &&
                   currentPhotos.map((doc) => (
                     <motion.div
+                    
                       layout
                       whileHover={{ opacity: 1 }}
                       s
@@ -160,6 +167,7 @@ const ImageGridDelivered = ({ setSelectedImg, selectedImg }) => {
                         <div className="photo-index-username"></div>
                       </div>
                       <motion.img
+                      className='image'
                         src={doc.url}
                         alt="uploaded pic"
                         // options={{

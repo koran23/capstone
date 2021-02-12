@@ -38,13 +38,7 @@ router.get(
       userId: userId,
       delivered: true
     },
-      include: [
-        {
-          model: Comment,
-          required: false,
-          // where: { photoId: 2 } //
-        },
-      ],
+   
     });
 
     res.json({ photos: photos });
@@ -69,11 +63,12 @@ router.post(
   "/:userId",
   singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
-    const { userId } = req.body;
+    const { userId, delivered } = req.body;
     const url = await singlePublicFileUpload(req.file);
     const photo = await Photo.create({
       userId,
       url,
+      delivered
     });
 
     // setTokenCookie(res, photo);

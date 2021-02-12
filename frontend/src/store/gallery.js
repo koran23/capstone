@@ -67,11 +67,13 @@ export const fetchAllComments = (photoId) => async (dispatch) => {
 };
 
 export const createPhoto = (photo) => async (dispatch) => {
-  const { image, userId } = photo;
+  const { image, userId, delivered } = photo;
   const formData = new FormData();
 
   // for single file
  if (image) formData.append("image", image);
+formData.append("delivered", delivered);
+formData.append("userId", userId);
 
   const res = await fetch(`/api/gallery/${userId}`, {
     method: "POST",

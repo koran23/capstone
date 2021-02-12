@@ -112,7 +112,7 @@ function Navigation({ isLoaded }) {
       <div className='nav_links'>
         <ul>
           <li>
-            <NavLink to={`/gallery/${sessionUser.id}`}>
+            <NavLink to={`/gallery`}>
               Gallery
             </NavLink>
           </li>

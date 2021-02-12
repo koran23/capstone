@@ -7,7 +7,7 @@ export default function Home() {
         
         <div className='Home'>
             <Feed/>
-            <PhotoSeries/>
+            {/* <PhotoSeries/> */}
         </div>    
     )
 }

@@ -30,7 +30,7 @@ const ImgGrid = styled.div`
     position: relative;
     column-count: 1;
     column-gap: 1em;
-    width: 85%;
+    width: 60%;
     margin-top: 25px;
     margin-bottom: 50px;
     
