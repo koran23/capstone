@@ -53,7 +53,7 @@ export const editProfile = (profilePic) => async (dispatch) => {
 
   const res = await fetch(`/api/profile/${userId}`, {
     method: "PUT",
-    // headers: {"Content-Type": "multipart/form-data"},
+    headers: {"Content-Type": "multipart/form-data"},
     body: formData,
   });
 
@@ -67,9 +67,9 @@ export const editSocial = (social) => async (dispatch) => {
 
   const res = await fetch(`/api/profile/social/${userId}`, {
     method: "PUT",
-     headers: {
-      "Content-Type": "application/json",
-    },
+    //  headers: {
+    //   "Content-Type": "application/json",
+    // },
     body: JSON.stringify(social),
   });
 
@@ -79,9 +79,9 @@ export const editSocial = (social) => async (dispatch) => {
 export const createProfile = (body) => async (dispatch) => {
   const res = await fetch(`/api/profile/`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
     body: JSON.stringify(body),
   });
   // const venues = await res.json();

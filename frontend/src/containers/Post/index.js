@@ -61,7 +61,7 @@ const PostStyle = styled.div`
 const Posts = ({ thePost }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.session.user);
-  const [vote, setVote] = useState(thePost.vote);
+  const [vote, setVote] = useState(1);
 
   const onVote = (e) => {
     e.preventDefault();

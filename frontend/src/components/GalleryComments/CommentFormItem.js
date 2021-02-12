@@ -72,8 +72,6 @@ export default function CommentFormItem({username, userId, comment, selectedImg}
 
   const loggedInUser = useSelector((store) => store.session.user);
 
-  console.log(userId)
-
     const deleteCommentButton = () => {
       const deleteButton = <button className="delete-comment">
       <i className="fa fa-times"

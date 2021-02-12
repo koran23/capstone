@@ -12,7 +12,6 @@ const FeedStyle = styled.div`
 }
 `
 
-
 export default function Feed() {
     return (
         <FeedStyle>
