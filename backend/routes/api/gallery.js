@@ -13,7 +13,30 @@ router.get(
     const userId = req.params.id;
 
     const photos = await Photo.findAll({ where: {
-      userId: userId
+      userId: userId,
+      delivered: false
+    },
+      include: [
+        {
+          model: Comment,
+          required: false,
+          // where: { photoId: 2 } //
+        },
+      ],
+    });
+
+    res.json({ photos: photos });
+  })
+);
+
+router.get(
+  "/delivered/:id",
+  asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+
+    const photos = await Photo.findAll({ where: {
+      userId: userId,
+      delivered: true
     },
       include: [
         {

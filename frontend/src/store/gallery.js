@@ -44,6 +44,16 @@ export const fetchAllPhotos = (id) => async (dispatch) => {
     dispatch(getGallery(res.data.photos));
   }
 };
+export const fetchAllDeliveredPhotos = (id) => async (dispatch) => {
+  const {userId} = id
+  const res = await fetch(`/api/gallery/delivered/${userId}`);
+  // const venues = await res.json();
+  console.log(res.data.photos)
+
+  if (res.ok) {
+    dispatch(getGallery(res.data.photos));
+  }
+};
 
 
 export const fetchAllComments = (photoId) => async (dispatch) => {

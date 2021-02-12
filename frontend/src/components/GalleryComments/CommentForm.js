@@ -279,6 +279,7 @@ export default function CommentForm({ selectedImg }) {
 
   return (
     <Comments>
+      {selectedImg.delivered == false ? 
       <div>
         <div className="comment-like">
           {/* <h2 className="h2-comment"> {photo.title} </h2> */}
@@ -310,11 +311,26 @@ export default function CommentForm({ selectedImg }) {
                 <br />
               </div>         
             </form>
-            <Button onClick={onClick}>post this photo</Button>
             {/* <CreatePost selectedImg={selectedImg}/> */}
           </div>
         </div>
       </div>
+: <div>
+        <div className="comment-like">
+          <h3>
+            Segen Shoots
+          </h3>
+          <div className="comment-form-container">
+            <form className="comment-form" onSubmit={onSubmit}>
+              <div className="comment-div">
+                <br />
+              </div>         
+            </form>
+            <Button onClick={onClick}>post this photo</Button>
+            {/* <CreatePost selectedImg={selectedImg}/> */}
+          </div>
+        </div>
+      </div>}
     </Comments>
   );
 }

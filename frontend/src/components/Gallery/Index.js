@@ -10,14 +10,30 @@ const ImgGrid = styled.div`
     display: block;
     
   }
+  .tag-options {
+  padding-top:10px;
+  margin-bottom: 10px;
+}
+
+.tag-options a {
+  padding: 10px;
+  font-family: 'Barlow Semi Condensed';
+  color: gray;
+  font-size: 15px;
+}
+.tag-options a:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
 
   .index-sub-display {
     position: relative;
     column-count: 1;
     column-gap: 1em;
-    width: 60%;
+    width: 85%;
     margin-top: 25px;
     margin-bottom: 50px;
+    
   }
   .index-photo-display {
     display: flex;
@@ -25,6 +41,7 @@ const ImgGrid = styled.div`
     align-items: center;
     margin: 30px;
     margin-top: 5px;
+     
   }
 
   .tile img {
@@ -34,6 +51,7 @@ const ImgGrid = styled.div`
     max-height: 100%;
     opacity: 0.8;
     cursor: pointer;
+    
     /* transition: 0.5s ease-in-out; */
   }
 
@@ -48,6 +66,7 @@ const ImgGrid = styled.div`
 
     /* background-color: ${(props) => props.theme.bg}; */
     filter: brightness(0.5) grayscale(100);
+    
   }
   .tile .liked {
     justify-content: center; /* horizontally align portrait image */
@@ -64,6 +83,10 @@ const ImgGrid = styled.div`
   .tile a:hover {
     cursor: pointer;
     filter: brightness() grayscale(0);
+  }
+       .image {
+		box-shadow: 0 1px 1px 2px rgba(0,0,0, .15);
+		border-radius: 2px;
   }
 
   a:hover {
@@ -113,7 +136,7 @@ const ImgGrid = styled.div`
       height: 100%;
       width: 100%;
       border-radius: 50%;
-      vertical-align: baseline;
+      vertical-align: baseline;     
     }
 
     a {
@@ -127,6 +150,7 @@ const ImgGrid = styled.div`
       flex: 0 0 auto;
       overflow: hidden;
       position: relative;
+      
     }
   }
 
@@ -183,6 +207,10 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
       <main>
         <div className="everything">
           <div className="index-photo-display">
+              <div className="tag-options">
+            <Link to={`/gallery`}>Undelivered</Link>
+            <Link to={`/delivered`}>Delivered</Link>
+          </div>
             <div className="index-sub-display">
               <div className="tile">
                 {currentPhotos &&
@@ -209,7 +237,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                               </Link>
                             </div>
                           </div>
-                          <motion.img
+                          <motion.img className='image'
                             src={doc.url}
                             alt="uploaded pic"
                             // options={{
