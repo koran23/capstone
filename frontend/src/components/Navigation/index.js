@@ -126,6 +126,11 @@ function Navigation({ isLoaded }) {
               Profile
             </NavLink>
             </li>
+          <li>
+            <NavLink exact to="/upload">
+              Upload
+            </NavLink>
+          </li>
             {/* <li>
             <NavLink exact to="/chat">
               Chat

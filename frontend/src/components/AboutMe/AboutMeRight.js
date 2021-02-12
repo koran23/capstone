@@ -67,6 +67,7 @@ const Right = styled.div`
 `
 
 export default function AboutMeRight() {
+   
 
      const loggedInUser = useSelector((state) => {
     return state.session.user;
@@ -76,15 +77,15 @@ export default function AboutMeRight() {
         <Right>
          <div class = "about-right">
         <h1>hi<span>!</span>{loggedInUser.username}</h1>
-        <h2>Here's who I am</h2>
+        {/* <h2>Here's who I am</h2> */}
         <div class = "about-btns">
           {/* <button type = "button" class = "btn btn-pink">resume</button>
           <button type = "button" class = "btn btn-white">projects</button> */}
         </div>
 
         <div class = "about-para">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, aspernatur possimus ullam quaerat, laboriosam ex voluptate aliquid laborum, obcaecati ratione accusamus! Ea nisi modi dolor nam numquam? Temporibus, molestias amet.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus iure tempora alias laudantium sapiente impedit!</p>
+          <p></p>
+          <p></p>
         </div>
       </div>
         </Right>

@@ -135,8 +135,6 @@ const DeliveredModal = ({ setSelectedImg, selectedImg }) => {
     }
   }, []);
   
-  console.log(selectedImg)
-  
   
   return (
       <Mod>

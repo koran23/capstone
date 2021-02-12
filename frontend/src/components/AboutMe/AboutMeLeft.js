@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components'
 import {editProfile} from '../../store/profile'
+import Button from '../../styles/Button'
+import { useHistory } from "react-router-dom";
 
 const Left = styled.div`
 
@@ -130,6 +132,7 @@ const Left = styled.div`
 `
 
 export default function AboutMeLeft() {
+   const history = useHistory();
   const dispatch = useDispatch();
   const [imgPreview, setImagePreview] = useState(null);
   const [image, setImage] = useState({ name: null });
@@ -139,7 +142,10 @@ export default function AboutMeLeft() {
     return state.session.user;
   });
 
-  console.log(loggedInUser)
+    const onClick = (e) => {
+    e.preventDefault()
+    history.push(`/social/${loggedInUser.id}`)
+  }
 
     const handleSubmit = (e) => {
     e.preventDefault();
@@ -183,9 +189,9 @@ export default function AboutMeLeft() {
               </label>
               <img className="imgPreview" src={imgPreview} alt=""></img>
               <br></br>
-              <button className="contact-form-btn-upload"  type="submit">
-                Post
-              </button>
+              <Button className="contact-form-btn-upload"  type="submit">
+                Upload
+              </Button>
             </form>
             <div class = "shadow">
               <div class = "about-img">
@@ -201,6 +207,7 @@ export default function AboutMeLeft() {
             <li><i class = "fab fa-linkedin"></i></li>
             <li><i class = "fab fa-instagram"></i></li>
           </ul>
+          <button onClick={onClick}>Add Socal Media</button>
         </div>
       </div>
       </Left>
