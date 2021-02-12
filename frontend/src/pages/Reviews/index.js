@@ -60,12 +60,12 @@ export default function Reviews() {
         <div>
             <ReviewTitle/>
             <div class='container'>
-                <div class='card card-1'>
+                {/* <div class='card card-1'>
                     <img src='https://media1.popsugar-assets.com/files/thumbor/uhmBYgnhE8Tco4jL5UnvnDW2LYI/1196x242:2764x1810/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/09/04/006/n/1922398/fe7006935d7044366c8982.50946989_/i/Rihanna.jpg'/>
                     <i class='fas fa-quote-left'></i>
                     <p>This was the best photoshoot ever! So professional, definitley recommend. Yes, this is Rihanna.</p>
                     <p className='name'>Rihanna</p>
-                </div>
+                </div> */}
             </div>
         </div>
         </ReviewStyle>

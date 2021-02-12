@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/gallery";
 import { likePhoto, fetchAllComments } from "../../store/gallery";
 import CommentFormItem from '../../components/GalleryComments/CommentFormItem'
-import CreatePost from '../../containers/CreatePost/index'
-import { Redirect, useHistory } from "react-router-dom";
-// import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Button from '../../styles/Button'
 
 const Comments = styled.div`
   .comment-like {
@@ -196,17 +195,31 @@ const Comments = styled.div`
 
 `;
 
+const Comment = () => {
+    const comments = useSelector((store) => store.gallery.comments);
+    const loggedInUser = useSelector((store) => store.session.user);
+    
+    return (
+      <div>{comments.length ? (
+          comments.map((comment) => {
+            if (comment) return (
+            <CommentFormItem username={loggedInUser.username} userId={comment.userId} comment={comment.comment} />
+          )})
+        ) : (
+          <></>
+        )}</div>     
+    )
+  }
+
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [edit, setEdit] = useState("");
-  const [like, setLike] = useState(false);
-  const [edits, setEdits] = useState([]);
+  const [like, setLike] = useState(true);
   const loggedInUser = useSelector((store) => store.session.user);
   let likeButtonText = <i className="fa fa-heart like-button" aria-hidden="true"></i>;
 
-const currentComments = [selectedImg]
-console.log(selectedImg)
+// const currentComments = [selectedImg]
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -262,25 +275,7 @@ console.log(selectedImg)
 
    if (selectedImg.like == true) {
        likeButtonText = <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>;
-    }
-
-    
-    const Comment = () => {
-    const comments = useSelector((store) => store.gallery.comments);
-
-    
-
-    return (
-      <div>{comments.length ? (
-          comments.map((comment) => {
-            if (comment) return (
-            <CommentFormItem username={loggedInUser.username} userId={comment.userId} comment={comment.comment} />
-          )})
-        ) : (
-          <></>
-        )}</div>     
-    )
-  }
+    } 
 
   return (
     <Comments>
@@ -301,7 +296,6 @@ console.log(selectedImg)
           <div className="comment-form-container">
             <form className="comment-form" onSubmit={onSubmit}>
               <div className='comments-scroll'>
-              {/* {this.renderComments()} */}
                 <Comment/>              
                 </div>
               <div className="comment-div">
@@ -316,7 +310,7 @@ console.log(selectedImg)
                 <br />
               </div>         
             </form>
-            <button onClick={onClick}>post this photo</button>
+            <Button onClick={onClick}>post this photo</Button>
             {/* <CreatePost selectedImg={selectedImg}/> */}
           </div>
         </div>

@@ -10,7 +10,12 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
 
-    const posts = await Post.findAll({include: Comment});
+    const posts = await Post.findAll({
+      order: [
+        ['vote', 'DESC']
+      ],
+      include: Comment
+    });
 
     return res.json({posts: posts});
   })

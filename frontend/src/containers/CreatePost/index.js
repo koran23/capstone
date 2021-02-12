@@ -59,8 +59,8 @@ const Upload = styled.div`
   }
       .imgPreview {
     width: auto;
-    height: 50px;
-    border-radius: 50%;
+    height: 400px;
+    /* border-radius: 50%; */
   }
 `;
 

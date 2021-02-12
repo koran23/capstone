@@ -65,7 +65,7 @@ export const createPhoto = (photo) => async (dispatch) => {
 
   const res = await fetch(`/api/gallery/${userId}`, {
     method: "POST",
-    // headers: {"Content-Type": "multipart/form-data"},
+    headers: {"Content-Type": "multipart/form-data"},
     body: formData,
   });
 
@@ -77,13 +77,13 @@ export const createComment = (comment) => async (dispatch) => {
 
   const res = await fetch(`/api/gallery/comments/${userId}`, {
     method: "POST",
-     headers: {
-      "Content-Type": "application/json",
-    },
+    //  headers: {
+    //   "Content-Type": "application/json",
+    // },
     body: JSON.stringify(comment),
 
   });
-  dispatch(setComment(comment));
+  dispatch(setComment(res.data.comment));
 };
 
 export const likePhoto = (liked) => async (dispatch) => {
@@ -91,9 +91,9 @@ export const likePhoto = (liked) => async (dispatch) => {
   console.log(liked)
   const res = await fetch(`/api/gallery/like/`, {
     method: "PATCH",
-     headers: {
-      "Content-Type": "application/json",
-    },
+    //  headers: {
+    //   "Content-Type": "application/json",
+    // },
     body: JSON.stringify(liked),
 
   });

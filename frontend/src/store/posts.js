@@ -60,9 +60,9 @@ export const createComment = (comment) => async (dispatch) => {
 
   const res = await fetch(`/api/posts/comments/${userId}`, {
     method: "POST",
-     headers: {
-      "Content-Type": "application/json",
-    },
+    //  headers: {
+    //   "Content-Type": "application/json",
+    // },
     body: JSON.stringify(comment),
 
   });
