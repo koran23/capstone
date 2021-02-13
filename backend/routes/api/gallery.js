@@ -96,6 +96,18 @@ router.post(
     return res.json({ comment: comment });
   })
 );
+router.delete(
+  "/comments/delete",
+  asyncHandler(async (req, res) => {
+    
+    const { comment } = req.body;
+
+    let comm = await Comment.findOne({where: {comment: comment}}).catch(e => {
+     console.log(e.message)
+  })
+  comm.destroy();
+  })
+);
 
 
 // Like a photo
