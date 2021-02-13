@@ -221,10 +221,14 @@ export default function CommentForm({ selectedImg }) {
 
 // const currentComments = [selectedImg]
 
+const download = () => {
+    const element = document.createElement("a");
+
+    element.click();
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    
-    //  window.location.href = '/pic';
   
     const payload = {
       photoId: selectedImg.id,
@@ -258,16 +262,12 @@ export default function CommentForm({ selectedImg }) {
   }
   
   useEffect(() => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
+
   }, [like]);
 
 
     useEffect(() => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
+
     dispatch(fetchAllComments(selectedImg.id));
   }, [dispatch, selectedImg.id]);
 
@@ -327,7 +327,15 @@ export default function CommentForm({ selectedImg }) {
               </div>         
             </form>
             <Button onClick={onClick}>post this photo</Button>
-            {/* <CreatePost selectedImg={selectedImg}/> */}
+            <a
+        href={selectedImg.url}
+        download
+        onClick={() => download()}
+      >
+        <Button >
+        download
+        </Button>
+      </a>
           </div>
         </div>
       </div>}

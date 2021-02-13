@@ -40,7 +40,7 @@ function App() {
               <LoginFormPage />
             </Route>
             <Route path="/splash">
-              <SinglePhotoPage />
+              <Splash />
             </Route>
             <Route path="/signup">
               <SignupFormPage />

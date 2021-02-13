@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import CommentInput from "../../components/CommandInput";
 import { fetchAllPosts, createVote } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
-import Comment from "../../components/Comment/index";
+
 
 const PostStyle = styled.div`
 
