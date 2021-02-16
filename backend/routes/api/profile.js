@@ -11,12 +11,12 @@ router.put(
   '/:userId',
   singleMulterUpload("image"),
   asyncHandler(async (req, res, next) => {
-    const {userId, twitter, linkden, facebook, instagram} = req.body;
-    const user = await User.findOne(userId);
+    const userId = parseInt(req.params.userId)
+    const {twitter, linkden, facebook, instagram} = req.body;
+    const user = await User.findByPk(userId)
 
     const url = await singlePublicFileUpload(req.file);
     if (user) await user.update({
-      userId: userId,
       twitter: twitter,
       facebook: facebook,
       linkden: linkden,

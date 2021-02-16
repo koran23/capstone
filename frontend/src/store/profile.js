@@ -64,21 +64,21 @@ export const editProfile = (profilePic) => async (dispatch) => {
   dispatch(setProfile(res.data.profilePic));
 };
 
-export const editSocial = (social) => async (dispatch) => {
-    const { facebook, twitter, linkden, instagram, userId } = social;
+// export const editSocial = (social) => async (dispatch) => {
+//     const { facebook, twitter, linkden, instagram, userId } = social;
 
-  // for single file
+//   // for single file
 
-  const res = await fetch(`/api/profile/social/${userId}`, {
-    method: "PUT",
-    //  headers: {
-    //   "Content-Type": "application/json",
-    // },
-    body: JSON.stringify(social),
-  });
+//   const res = await fetch(`/api/profile/social/${userId}`, {
+//     method: "PUT",
+//     //  headers: {
+//     //   "Content-Type": "application/json",
+//     // },
+//     body: JSON.stringify(social),
+//   });
 
-  dispatch(setSocial(res.data.social));
-};
+//   dispatch(setSocial(res.data.social));
+// };
 
 export const createProfile = (body) => async (dispatch) => {
   const res = await fetch(`/api/profile/`, {

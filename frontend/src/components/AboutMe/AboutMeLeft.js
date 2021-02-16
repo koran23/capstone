@@ -25,8 +25,10 @@ const Left = styled.div`
     -moz-box-shadow: 0px 0px 18px -1px rgba(0, 0, 0, 0.39);
   }
   .about-img img {
-    display: block;
     width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    object-fit: cover;
   }
   .about-img {
     width: 200px;
