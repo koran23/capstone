@@ -122,7 +122,7 @@ function EditSocialPage() {
         twitter: twitter,
         facebook: facebook,
         instagram: instagram,
-        linkden: linkedin,
+        linkedin: linkedin,
       })
     )
       .then(() => {
