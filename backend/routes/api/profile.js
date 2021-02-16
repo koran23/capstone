@@ -19,7 +19,7 @@ router.put(
     if (user) await user.update({
       twitter: twitter,
       facebook: facebook,
-      linkden: linkden,
+      linkedin: linkedin,
       instagram: instagram,
       profilePic: url
     });

@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      linkden: {
+      linkedin: {
         type: Sequelize.STRING,
         allowNull: true,
       },

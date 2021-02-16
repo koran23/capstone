@@ -90,7 +90,7 @@ function EditSocialPage() {
   const [twitter, setTwitter] = useState("");
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
-  const [linkden, setLinkden] = useState("");
+  const [linkedin, setLinkedin] = useState("");
   const [imgPreview, setImagePreview] = useState(null);
   const [image, setImage] = useState({ name: null });
   const [errors, setErrors] = useState([]);
@@ -122,7 +122,7 @@ function EditSocialPage() {
         twitter: twitter,
         facebook: facebook,
         instagram: instagram,
-        linkden: linkden,
+        linkden: linkedin,
       })
     )
       .then(() => {
@@ -201,8 +201,8 @@ function EditSocialPage() {
           Linkden
           <input
             type="text"
-            value={linkden}
-            onChange={(e) => setLinkden(e.target.value)}
+            value={linkedin}
+            onChange={(e) => setLinkedin(e.target.value)}
             required
           />
         </label>

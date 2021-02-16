@@ -45,13 +45,13 @@ export const deleteCurrentProfile = (userId) => async (dispatch) => {
   
 };
 export const editProfile = (profilePic) => async (dispatch) => {
-    const { image, userId, twitter, linkden, facebook, instagram } = profilePic;
+    const { image, userId, twitter, linkedin, facebook, instagram } = profilePic;
   const formData = new FormData();
 
   // for single file
  if (image) formData.append("image", image);
  formData.append("twitter", twitter);
- formData.append("linkden", linkden);
+ formData.append("linkedin", linkedin);
  formData.append("facebook", facebook);
  formData.append("instagram", instagram);
 
