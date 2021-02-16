@@ -5,58 +5,75 @@ import { createPhoto } from "../../store/gallery";
 import styled from "styled-components";
 import Button from '../../styles/Button'
 
-const Upload = styled.div`
+export const Upload = styled.div`
+  width: 385px;
+  padding: 3rem 1.5rem;
+  background: ${(props) => props.theme.grey};
+  border-radius: 4px;
+  margin: 8% auto;
 
-  form {
-    margin: 30px auto 10px;
-    text-align: center;
-    width: 385px;
-    padding: 3rem 1.5rem;
-    /* background: ${(props) => props.theme.grey}; */
-    border-radius: 4px;
-    margin: 8% auto;
+  h2 {
+    margin-bottom: 1.3rem;
   }
-  /* label input {
-    height: 0;
-    width: 0;
-    opacity: 0;
-  } */
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .input-group input:last-child {
+    margin-left: 0.7rem;
+  }
   label {
-    display: block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid var(--primary);
-    border-radius: 50%;
-    margin: 1px auto;
-    line-height: 30px;
-    color: var(--primary);
-    font-weight: bold;
-    font-size: 16px;
+     border: 1px solid ${(props) => props.theme.black};
+    margin-bottom: 1.5rem;
+    color: ${(props) => props.theme.bg};
   }
+
   input {
     overflow: hidden;
     border-radius: 3px;
-    /* width: 100%; */
-    /* padding: 0.6rem 1.2rem; */
+    width: 100%;
+    padding: 0.6rem 1.2rem;
+    background: ${(props) => props.theme.black};
+    border: 1px solid ${(props) => props.theme.black};
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid #fff;
-    color: ${(props) => props.theme.primaryColor};
+    color: ${(props) => props.theme.bg};
   }
-  /* label:hover {
-    background: var(--primary);
-    color: white;
-  } */
-  .output {
-    height: 60px;
-    font-size: 0.8rem;
+
+  textarea {
+    overflow: hidden;
+    width: 100%;
+    padding: 0.6rem 1.2rem;
+    background: ${(props) => props.theme.black};
+    border: 1px solid ${(props) => props.theme.bg};
+    margin-bottom: 1.5rem;
+    color: ${(props) => props.theme.bg};
   }
-  .imgPreview {
-    width: auto;
-    height: 100px;
-    /* border-radius: 50%; */
+
+  .action {
+    margin-top: 1rem;
   }
-  .error {
-    color: var(--error);
+
+  button {
+    padding: 0.4rem 1rem;
+    background: ${(props) => props.theme.blue};
+    color: ${(props) => props.theme.white};
+    border: 1px solid ${(props) => props.theme.blue};
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+  }
+
+  span {
+    letter-spacing: 0.8px;
+    color: ${(props) => props.theme.secondaryColor};
+  }
+
+  @media screen and (max-width: 430px) {
+    margin: 20% auto;
+    width: 90%;
   }
 `;
 
@@ -112,7 +129,7 @@ const UploadForm = () => {
         </label>
         <img className="imgPreview" src={imgPreview} alt=""></img>
         <br></br>
-        <label>Delivery?</label>
+        <label>Is this a delivery?</label>
         <input
           type="checkbox"
           checked={delivered}
@@ -120,7 +137,7 @@ const UploadForm = () => {
           onChange={() => setDelivered(!delivered)}
         />
         <br></br>
-        <Button type="submit">Post</Button>
+        <Button type="submit">Upload</Button>
       </form>
     </Upload>
   );
