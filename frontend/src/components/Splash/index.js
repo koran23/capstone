@@ -1,5 +1,5 @@
 import React from "react";
-import BackgroundImage from "/Users/ahdariscott/Desktop/segen-site/frontend/src/assets/segen.jpg"
+import BackgroundImage from "frontend/src/assets/segen.jpg"
 import styled from 'styled-components'
 
 const Background = styled.div`
