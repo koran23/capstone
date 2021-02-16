@@ -23,8 +23,8 @@ const GlobalStyle = createGlobalStyle`
 		background-color: ${(props) => props.theme.bg};
 		line-height: 1.8;
 		 /* opacity: 0.87; */
-  		background-image: radial-gradient(#383838 .5px, #fafafa .72px);
-  		background-size: 20px 20px;
+  		/* background-image: radial-gradient(#383838 .5px, #fafafa .72px);
+  		background-size: 20px 20px; */
 	}
 
 	h1, h2, h3, h4, h5, h6 {

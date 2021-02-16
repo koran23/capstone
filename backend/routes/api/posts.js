@@ -36,12 +36,14 @@ router.get(
 router.post(
   "/",
   asyncHandler(async (req, res) => {
-    const {caption, userId, image} = req.body;
+    const {caption, userId, image, username, profilePic} = req.body;
     console.log(req.body)
     const post = await Post.create({
       caption: caption,
       userId: userId,
-      picture: image
+      picture: image,
+      username: username,
+      profilePic: profilePic
     });
 
     // setTokenCookie(res, photo);

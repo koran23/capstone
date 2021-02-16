@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import CommentInput from "../../components/CommandInput";
 import { fetchAllPosts, createVote } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
-import Comment from "../../components/Comment/index";
+
 
 const PostStyle = styled.div`
 
@@ -85,17 +84,14 @@ const Posts = ({ thePost }) => {
     
   }, [vote]);
 
-  const User = {
-    caption: "Yerrrr!",
-    username: "Segen Shoots",
-  };
+
   return (
     <PostStyle>
       <div className="post">
         <div className="post__header">
           <div className="post__headerLeft">
-            <img className="post__profilePic" src={thePost.picture} />
-            <p style={{ marginLeft: "8px" }}>{User.username}</p>
+            <img className="post__profilePic" src={thePost.profilePic} />
+            <p style={{ marginLeft: "8px" }}>{thePost.username}</p>
           </div>
           <button className="post__delete">delete</button>
         </div>
@@ -106,7 +102,7 @@ const Posts = ({ thePost }) => {
         <div>
           <p>
             <span style={{ fontWeight: "500", marginRight: "4px" }}>
-              {User.username}
+              {thePost.username}
             </span>
             {thePost.caption}
           </p>
@@ -122,7 +118,7 @@ const Posts = ({ thePost }) => {
           </button>
         </div>
         {/* <CommentInput postId={thePost.id} /> */}
-        {thePost.Comments ? (
+        {/* {thePost.Comments ? (
           thePost.Comments.map((comment) => {
             return <Comment
               username={User.username}
@@ -132,7 +128,7 @@ const Posts = ({ thePost }) => {
           })
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </PostStyle>
   );

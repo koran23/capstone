@@ -16,14 +16,15 @@ import Modal from "./components/Gallery/Modal";
 import Splash from "./components/Splash";
 import AboutMeContainer from "./containers/AboutMeContainer";
 import EditSocialPage from "./components/EditSocialPage";
-import SinglePhotoPage from './components/SinglePhotoPage'
-import CreatePost from './containers/CreatePost/index'
+import SinglePhotoPage from "./components/SinglePhotoPage";
+import CreatePost from "./containers/CreatePost/index";
+import ImageGridDelivered from "./components/DeliveredPhotos";
+import DeliveredModal from "./components/DeliveredPhotos/DeliveredModal";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedImg, setSelectedImg] = useState(null);
-
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -39,7 +40,7 @@ function App() {
               <LoginFormPage />
             </Route>
             <Route path="/splash">
-              <SinglePhotoPage />
+              <Splash />
             </Route>
             <Route path="/signup">
               <SignupFormPage />
@@ -48,17 +49,18 @@ function App() {
               <Home />
             </Route>
             <Route path="/create-post" exact>
-              {selectedImg && (
-                <CreatePost selectedImg={selectedImg} />
-              )}        
+              {selectedImg && <CreatePost selectedImg={selectedImg} />}
             </Route>
             <Route path="/about-me" exact>
               <AboutMeContainer />
             </Route>
+            <Route path="/upload" exact>
+              <UploadForm />
+            </Route>
             <Route path="/social/:userId" exact>
               <EditSocialPage />
             </Route>
-            <Route path="/gallery/:userId">
+            <Route path="/gallery">
               {/* <UploadForm/> */}
               <ImageGrid
                 setSelectedImg={setSelectedImg}
@@ -66,7 +68,18 @@ function App() {
               />
               {selectedImg && (
                 <Modal
-              
+                  selectedImg={selectedImg}
+                  setSelectedImg={setSelectedImg}
+                />
+              )}
+            </Route>
+            <Route path="/delivered">
+              <ImageGridDelivered
+                setSelectedImg={setSelectedImg}
+                selectedImg={selectedImg}
+              />
+              {selectedImg && (
+                <DeliveredModal
                   selectedImg={selectedImg}
                   setSelectedImg={setSelectedImg}
                 />

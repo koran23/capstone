@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPhotos, unloadGallery } from "../../store/gallery";
+import { fetchAllDeliveredPhotos, unloadGallery } from "../../store/gallery";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const ImgGrid = styled.div`
   main {
     display: block;
-    
   }
-  .tag-options {
+
+  .index-photo-display {
+  display: -webkit-flex;
+  flex-flow: column;
+  align-items: center;
+  margin: 30px;
+  margin-top: 80px;
+}
+
+.tag-options {
   padding-top:10px;
   margin-bottom: 10px;
 }
@@ -30,10 +38,9 @@ const ImgGrid = styled.div`
     position: relative;
     column-count: 1;
     column-gap: 1em;
-    width: 60%;
+    width: 85%;
     margin-top: 25px;
     margin-bottom: 50px;
-    
   }
   .index-photo-display {
     display: flex;
@@ -41,7 +48,6 @@ const ImgGrid = styled.div`
     align-items: center;
     margin: 30px;
     margin-top: 5px;
-     
   }
 
   .tile img {
@@ -51,7 +57,6 @@ const ImgGrid = styled.div`
     max-height: 100%;
     opacity: 0.8;
     cursor: pointer;
-    
     /* transition: 0.5s ease-in-out; */
   }
 
@@ -66,7 +71,6 @@ const ImgGrid = styled.div`
 
     /* background-color: ${(props) => props.theme.bg}; */
     filter: brightness(0.5) grayscale(100);
-    
   }
   .tile .liked {
     justify-content: center; /* horizontally align portrait image */
@@ -84,82 +88,16 @@ const ImgGrid = styled.div`
     cursor: pointer;
     filter: brightness() grayscale(0);
   }
-       .image {
+
+      .image {
 		box-shadow: 0 1px 1px 2px rgba(0,0,0, .15);
 		border-radius: 2px;
-  }
+      }
 
   a:hover {
     opacity: 0.9;
-
-    .username-display {
-      visibility: visible;
-    }
-    .photo-index-user {
-      visibility: visible;
-    }
   }
-
-  .username-display {
-    display: flex;
-    flex-direction: row;
-    font-family: "Barlow Semi Condensed";
-    padding: 5px;
-    visibility: hidden;
-    position: absolute;
-
-    .username {
-      font-size: 15px;
-      color: white;
-      text-transform: lowercase;
-    }
-  }
-
-  .username-display:hover {
-    opacity: 0.6;
-    cursor: pointer;
-  }
-
-  .photo-index-user {
-    width: 35px;
-    display: block;
-    box-flex: 0;
-    flex: none;
-    box-align: stretch;
-    align-items: stretch;
-    box-orient: vertical;
-    box-direction: normal;
-    padding-left: px;
-    padding-top: 5px;
-
-    img {
-      height: 100%;
-      width: 100%;
-      border-radius: 50%;
-      vertical-align: baseline;     
-    }
-
-    a {
-      width: 30px;
-      height: 30px;
-      // background-color: #fafafa;
-      box-sizing: border-box;
-      display: block;
-      box-flex: 0;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      overflow: hidden;
-      position: relative;
-      
-    }
-  }
-
-  .photo-index-username {
-    display: -webkit-flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 9px;
-  }
+  
 
   @media only screen and (min-width: 600px) {
     .index-sub-display {
@@ -186,7 +124,7 @@ const ImgGrid = styled.div`
   }
 `;
 
-const ImageGrid = ({ setSelectedImg, selectedImg }) => {
+const ImageGridDelivered = ({ setSelectedImg, selectedImg }) => {
   const dispatch = useDispatch();
 
   // Generate random prompts???
@@ -199,7 +137,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
   const loggedInUser = useSelector((store) => store.session.user);
 
   useEffect(async () => {
-    dispatch(fetchAllPhotos({ userId: loggedInUser.id }));
+    dispatch(fetchAllDeliveredPhotos({ userId: loggedInUser.id }));
   }, []);
 
   return (
@@ -207,7 +145,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
       <main>
         <div className="everything">
           <div className="index-photo-display">
-              <div className="tag-options">
+            <div className="tag-options">
             <Link to={`/gallery`}>Proofs</Link>
             <Link to={`/delivered`}>Delivered</Link>
           </div>
@@ -216,6 +154,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                 {currentPhotos &&
                   currentPhotos.map((doc) => (
                     <motion.div
+                    
                       layout
                       whileHover={{ opacity: 1 }}
                       s
@@ -223,57 +162,21 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                         setSelectedImg(doc);
                       }}
                     >
-                      {doc.like === true ? (
-                        <a className="liked">
-                          <div className="username-display">
-                            <div className="photo-index-user">
-                              <Link to={`/about-me`}>
-                                <img src={loggedInUser.profilePic} />
-                              </Link>
-                            </div>
-                            <div className="photo-index-username">
-                              <Link to={`/about-me`} className="username">
-                                {loggedInUser.username}
-                              </Link>
-                            </div>
-                          </div>
-                          <motion.img className='image'
-                            src={doc.url}
-                            alt="uploaded pic"
-                            // options={{
-                            //   fillWidth: true,
-                            // }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1 }}
-                          />
-                        </a>
-                      ) : (
-                        <a>
-                          <div className="username-display">
-                            <div className="photo-index-user">
-                              <Link to={`/about-me`}>
-                                <img src={loggedInUser.profilePic} />
-                              </Link>
-                            </div>
-                            <div className="photo-index-username">
-                              <Link to={`/about-me`} className="username">
-                                {loggedInUser.username}
-                              </Link>
-                            </div>
-                          </div>
-                          <motion.img
-                            src={doc.url}
-                            alt="uploaded pic"
-                            // options={{
-                            //   fillWidth: true,
-                            // }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1 }}
-                          />
-                        </a>
-                      )}
+                      <div className="username-display">
+                        <div className="photo-index-user"></div>
+                        <div className="photo-index-username"></div>
+                      </div>
+                      <motion.img
+                      className='image'
+                        src={doc.url}
+                        alt="uploaded pic"
+                        // options={{
+                        //   fillWidth: true,
+                        // }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1 }}
+                      />
                     </motion.div>
                   ))}
               </div>
@@ -285,4 +188,4 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
   );
 };
 
-export default ImageGrid;
+export default ImageGridDelivered;

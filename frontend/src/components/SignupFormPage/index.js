@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import BackgroundImage from "/Users/ahdariscott/Desktop/segen-site/frontend/src/assets/segen.jpg"
 import "./SignupForm.css";
 import styled from "styled-components";
 import Button from '../../styles/Button';
@@ -13,6 +14,7 @@ export const StyledAuth = styled.div`
   border-radius: 4px;
   
   margin: 8% auto;
+
 
   h2 {
     margin-bottom: 1.3rem;
@@ -76,6 +78,7 @@ export const StyledAuth = styled.div`
     width: 90%;
   }
 `;
+
 
 function SignupFormPage() {
   const dispatch = useDispatch();

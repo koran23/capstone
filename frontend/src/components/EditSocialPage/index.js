@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link, useHistory } from "react-router-dom";
-import {editSocial} from '../../store/profile'
+import { editProfile } from "../../store/profile";
 import styled from "styled-components";
-import Button from '../../styles/Button';
+import Button from "../../styles/Button";
 
 export const StyledAuth = styled.div`
-   width: 385px;
+  width: 385px;
   padding: 3rem 1.5rem;
   /* background: ${(props) => props.theme.grey}; */
   border-radius: 4px;
-  
+
   margin: 8% auto;
 
   h2 {
@@ -51,6 +51,13 @@ export const StyledAuth = styled.div`
     color: ${(props) => props.theme.primaryColor};
   }
 
+  .imgPreview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    object-fit: cover;
+  }
+
   .action {
     margin-top: 1rem;
   }
@@ -84,23 +91,62 @@ function EditSocialPage() {
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
   const [linkden, setLinkden] = useState("");
+  const [imgPreview, setImagePreview] = useState(null);
+  const [image, setImage] = useState({ name: null });
   const [errors, setErrors] = useState([]);
 
   const loggedInUser = useSelector((store) => store.session.user);
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const payload = {
+  //     userId: loggedInUser.id,
+  //     twitter: twitter,
+  //     facebook: facebook,
+  //     instagram: instagram,
+  //     linkden: linkden,
+  //   };
+
+  //   dispatch(editSocial(payload));
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const payload = {
+    let newErrors = [];
+    console.log(image);
+    dispatch(
+      editProfile({
         userId: loggedInUser.id,
+        image,
         twitter: twitter,
         facebook: facebook,
         instagram: instagram,
-        linkden: linkden
+        linkden: linkden,
+      })
+    )
+      .then(() => {
+        setImage(null);
+      })
+      .catch((res) => {
+        if (res.data && res.data.errors) {
+          newErrors = res.data.errors;
+          setErrors(newErrors);
+        }
+      });
+  };
+
+  const updatePost = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
+
+    const fileReader = new FileReader();
+    if (file) {
+      fileReader.readAsDataURL(file);
     }
-
-    dispatch(editSocial(payload))
-
+    fileReader.onloadend = () => {
+      setImagePreview(fileReader.result);
+    };
   };
 
   return (
@@ -112,6 +158,15 @@ function EditSocialPage() {
           ))}
         </ul>
 
+        <label>
+          Profile Picture
+          <input type="file" onChange={updatePost} name="image" />
+          {/* <span>+</span> */}
+        </label>
+        <img className="imgPreview" src={imgPreview} alt=""></img>
+        <br />
+        <br />
+        <br />
         <label>
           Twitter
           <input
@@ -143,7 +198,7 @@ function EditSocialPage() {
         </label>
 
         <label>
-         Linkden
+          Linkden
           <input
             type="text"
             value={linkden}
@@ -154,8 +209,8 @@ function EditSocialPage() {
 
         {/* <div className="action input-group"> */}
 
-          <button type="submit">Submit</button>
-          <br></br>
+        <button type="submit">Submit</button>
+        <br></br>
       </form>
     </StyledAuth>
   );

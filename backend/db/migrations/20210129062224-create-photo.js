@@ -11,6 +11,9 @@ module.exports = {
       url: {
         type: Sequelize.STRING
       },
+      delivered: {
+        type: Sequelize.BOOLEAN
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {model: 'Users'}

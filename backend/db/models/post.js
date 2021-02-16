@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
     picture: DataTypes.STRING,
     caption: DataTypes.STRING,
+    profilePic: DataTypes.STRING,
+    username: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     vote: DataTypes.INTEGER,
   }, {});

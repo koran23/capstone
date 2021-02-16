@@ -1,10 +1,15 @@
 import React from "react";
-import BackgroundImage from "../../assets/spicsgs9nde61.png"
+import BackgroundImage from "/Users/ahdariscott/Desktop/segen-site/frontend/src/assets/segen.jpg"
 import styled from 'styled-components'
 
 const Background = styled.div`
 .background {
   background-size: cover;
+  position: fixed;
+top: 0;
+width: 100%;
+height: 100%;
+background-size: cover;
 }
 `
 
@@ -18,7 +23,8 @@ export default function Splash() {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-    >hello world
+    >
+      
     </div>
     </Background>
   );

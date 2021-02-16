@@ -14,6 +14,12 @@ module.exports = {
       caption: {
         type: Sequelize.STRING
       },
+      username: {
+        type: Sequelize.STRING
+      },
+      profilePic: {
+        type: Sequelize.STRING
+      },
       vote: {
         type: Sequelize.INTEGER
       },

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/gallery";
 import { likePhoto, fetchAllComments } from "../../store/gallery";
-import CommentFormItem from '../../components/GalleryComments/CommentFormItem'
+import CommentFormItem from "../../components/GalleryComments/CommentFormItem";
 import { useHistory } from "react-router-dom";
-import Button from '../../styles/Button'
+import Button from "../../styles/Button";
 
 const Comments = styled.div`
   .comment-like {
@@ -39,12 +39,12 @@ const Comments = styled.div`
     flex-direction: column;
     color: gray;
     font-family: "Barlow Semi Condensed";
-     /* position: absolute; */
-     /* width: 91%; */
-     /* height: 430px; */
-     /* top: 70%; */
-     /* left: 46%; */
-     /* -webkit-transform: translate(-50%, -50%); */
+    /* position: absolute; */
+    /* width: 91%; */
+    /* height: 430px; */
+    /* top: 70%; */
+    /* left: 46%; */
+    /* -webkit-transform: translate(-50%, -50%); */
     background-color: white;
     // border: 1px solid gray;
     border-radius: 5px;
@@ -191,25 +191,32 @@ const Comments = styled.div`
       max-width: 180px;
     }
   }
-
-
 `;
 
-const Comment = () => {
-    const comments = useSelector((store) => store.gallery.comments);
-    const loggedInUser = useSelector((store) => store.session.user);
-    
-    return (
-      <div>{comments.length ? (
-          comments.map((comment) => {
-            if (comment) return (
-            <CommentFormItem username={loggedInUser.username} userId={comment.userId} comment={comment.comment} />
-          )})
-        ) : (
-          <></>
-        )}</div>     
-    )
-  }
+const Comment = ({selectedImg}) => {
+  const comments = useSelector((store) => store.gallery.comments);
+  const loggedInUser = useSelector((store) => store.session.user);
+
+  return (
+    <div>
+      {comments.length ? (
+        comments.map((comment) => {
+          if (comment)
+            return (
+              <CommentFormItem
+                username={loggedInUser.username}
+                userId={comment.userId}
+                comment={comment.comment}
+                selectedImg={selectedImg}
+              />
+            );
+        })
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
 
 export default function CommentForm({ selectedImg }) {
   const dispatch = useDispatch();
@@ -217,104 +224,120 @@ export default function CommentForm({ selectedImg }) {
   const [edit, setEdit] = useState("");
   const [like, setLike] = useState(true);
   const loggedInUser = useSelector((store) => store.session.user);
-  let likeButtonText = <i className="fa fa-heart like-button" aria-hidden="true"></i>;
+  let likeButtonText = (
+    <i className="fa fa-heart like-button" aria-hidden="true"></i>
+  );
 
-// const currentComments = [selectedImg]
+  // const currentComments = [selectedImg]
+
+  const download = () => {
+    const element = document.createElement("a");
+
+    element.click();
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
-    //  window.location.href = '/pic';
-  
+
     const payload = {
       photoId: selectedImg.id,
       userId: loggedInUser.id,
       edit,
     };
-    
+
     dispatch(createComment(payload));
     dispatch(fetchAllComments(selectedImg.id));
     // history.push(`/gallery`);
   };
 
   const onClick = (e) => {
-    e.preventDefault()
-    history.push('/create-post')
-  }
-
+    e.preventDefault();
+    history.push("/create-post");
+  };
 
   const onLike = (e) => {
     e.preventDefault();
-    setLike(!like)
-    const setLikedImg = () => selectedImg.like = like
-    setLikedImg()
+    setLike(!like);
+    const setLikedImg = () => (selectedImg.like = like);
+    setLikedImg();
 
-     const payload = {
-    photoId: selectedImg.id,
-    userId: loggedInUser.id,
-    like
-  };
+    const payload = {
+      photoId: selectedImg.id,
+      userId: loggedInUser.id,
+      like,
+    };
     dispatch(likePhoto(payload));
-  }
-  
+  };
+
+  useEffect(() => {}, [like]);
+
   useEffect(() => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
-  }, [like]);
-
-
-    useEffect(() => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
     dispatch(fetchAllComments(selectedImg.id));
   }, [dispatch, selectedImg.id]);
 
-  
-
-   if (selectedImg.like == true) {
-       likeButtonText = <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>;
-    } 
+  if (selectedImg.like == true) {
+    likeButtonText = (
+      <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>
+    );
+  }
 
   return (
     <Comments>
-      <div>
-        <div className="comment-like">
-          {/* <h2 className="h2-comment"> {photo.title} </h2> */}
-          <h3>
-            Segen Shoots
-            {/* <Link
-            to={`/users/${photo.owner_id}/photos`}
-            className="comment-username"
-          >
-            {photo.username}
-          </Link> */}
-          </h3>
-          <button onClick={onLike} value={like} className="like-button">{likeButtonText}</button>
-          {/* {this.renderLikes()} */}
-          <div className="comment-form-container">
-            <form className="comment-form" onSubmit={onSubmit}>
-              <div className='comments-scroll'>
-                <Comment/>              
+      {selectedImg.delivered == false ? (
+        <div>
+          <div className="comment-like">
+            {/* <h2 className="h2-comment"> {photo.title} </h2> */}
+            <h3>
+              Segen Shoots
+            </h3>
+            <button onClick={onLike} value={like} className="like-button">
+              {likeButtonText}
+            </button>
+            <div className="comment-form-container">
+              <form className="comment-form" onSubmit={onSubmit}>
+                <div className="comments-scroll">
+                  <Comment selectedImg={selectedImg} />
                 </div>
-              <div className="comment-div">
-                <input
-                  type="text"
-                  value={edit}
-                  onChange={(e) => setEdit(e.target.value)}
-                  // value={this.state.body}
-                  // onChange={this.handleInput("body")}
-                  placeholder="Edit requests..."
-                />
-                <br />
-              </div>         
-            </form>
-            <Button onClick={onClick}>post this photo</Button>
-            {/* <CreatePost selectedImg={selectedImg}/> */}
+                <div className="comment-div">
+                  <input
+                    type="text"
+                    value={edit}
+                    onChange={(e) => setEdit(e.target.value)}
+                    // value={this.state.body}
+                    // onChange={this.handleInput("body")}
+                    placeholder="Edit requests..."
+                  />
+                  <br />
+                </div>
+              </form>
+              {/* <CreatePost selectedImg={selectedImg}/> */}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>
+          <div className="comment-like">
+            <h3>Segen Shoots</h3>
+            <div className="comment-form-container">
+              <form className="comment-form" onSubmit={onSubmit}>
+                <div className="comment-div">
+                  <br />
+                  <p>Hi friend! Do you love this photo & your experience shooting
+                    with me? I'd love for you to tell the world! Click "post" and 
+                    leave a review. Your thoughts are greatly appreciated!
+                  </p>
+                  <br/>
+                </div>
+              <Button onClick={onClick}>post</Button>
+              </form>
+              <br></br>
+              <a href={selectedImg.url} download onClick={() => download()}>
+                <Button>download</Button>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </Comments>
   );
 }

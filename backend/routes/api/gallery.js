@@ -13,7 +13,8 @@ router.get(
     const userId = req.params.id;
 
     const photos = await Photo.findAll({ where: {
-      userId: userId
+      userId: userId,
+      delivered: false
     },
       include: [
         {
@@ -22,6 +23,22 @@ router.get(
           // where: { photoId: 2 } //
         },
       ],
+    });
+
+    res.json({ photos: photos });
+  })
+);
+
+router.get(
+  "/delivered/:id",
+  asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+
+    const photos = await Photo.findAll({ where: {
+      userId: userId,
+      delivered: true
+    },
+   
     });
 
     res.json({ photos: photos });
@@ -46,11 +63,12 @@ router.post(
   "/:userId",
   singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
-    const { userId } = req.body;
+    const { userId, delivered } = req.body;
     const url = await singlePublicFileUpload(req.file);
     const photo = await Photo.create({
       userId,
       url,
+      delivered
     });
 
     // setTokenCookie(res, photo);
@@ -76,6 +94,18 @@ router.post(
       comment: edit,
     });
     return res.json({ comment: comment });
+  })
+);
+router.delete(
+  "/comments/delete",
+  asyncHandler(async (req, res) => {
+    
+    const { comment } = req.body;
+
+    let comm = await Comment.findOne({where: {comment: comment}}).catch(e => {
+     console.log(e.message)
+  })
+  comm.destroy();
   })
 );
 

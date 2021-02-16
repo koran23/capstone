@@ -112,20 +112,25 @@ function Navigation({ isLoaded }) {
       <div className='nav_links'>
         <ul>
           <li>
-            <NavLink to={`/gallery/${sessionUser.id}`}>
-              Gallery
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="/posts">
-              Posts
+            <NavLink to={`/gallery`}>
+              My Gallery
             </NavLink>
           </li>
           <li>
             <NavLink exact to="/about-me">
-              Profile
+              My Profile
             </NavLink>
             </li>
+          <li>
+            <NavLink exact to="/posts">
+              Reviews
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact to="/upload">
+              Upload
+            </NavLink>
+          </li>
             {/* <li>
             <NavLink exact to="/chat">
               Chat
