@@ -208,7 +208,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
         <div className="everything">
           <div className="index-photo-display">
               <div className="tag-options">
-            <Link to={`/gallery`}>Undelivered</Link>
+            <Link to={`/gallery`}>Samples</Link>
             <Link to={`/delivered`}>Delivered</Link>
           </div>
             <div className="index-sub-display">

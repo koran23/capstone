@@ -129,6 +129,9 @@ const Left = styled.div`
     height: 25px;
     border-radius: 50%;
   }
+  button {
+    justify-content: center;
+  }
 `
 
 export default function AboutMeLeft() {

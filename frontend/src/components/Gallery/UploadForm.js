@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPhoto } from "../../store/gallery";
 import styled from "styled-components";
+import Button from '../../styles/Button'
 
 const Upload = styled.div`
+
   form {
     margin: 30px auto 10px;
     text-align: center;
@@ -14,11 +16,11 @@ const Upload = styled.div`
     border-radius: 4px;
     margin: 8% auto;
   }
-  label input {
+  /* label input {
     height: 0;
     width: 0;
     opacity: 0;
-  }
+  } */
   label {
     display: block;
     width: 30px;
@@ -31,6 +33,15 @@ const Upload = styled.div`
     font-weight: bold;
     font-size: 16px;
   }
+  input {
+    overflow: hidden;
+    border-radius: 3px;
+    /* width: 100%; */
+    /* padding: 0.6rem 1.2rem; */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #fff;
+    color: ${(props) => props.theme.primaryColor};
+  }
   /* label:hover {
     background: var(--primary);
     color: white;
@@ -42,7 +53,7 @@ const Upload = styled.div`
   .imgPreview {
     width: auto;
     height: 100px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
   .error {
     color: var(--error);
@@ -97,19 +108,19 @@ const UploadForm = () => {
       <form onSubmit={handleSubmit}>
         <label>
           <input type="file" onChange={updatePost} name="image" />
-          <span>+</span>
+          {/* <span>+</span> */}
         </label>
         <img className="imgPreview" src={imgPreview} alt=""></img>
         <br></br>
+        <label>Delivery?</label>
         <input
           type="checkbox"
           checked={delivered}
           value={delivered}
           onChange={() => setDelivered(!delivered)}
         />
-        <label>Delivery?</label>
         <br></br>
-        <button type="submit">Post</button>
+        <Button type="submit">Post</Button>
       </form>
     </Upload>
   );

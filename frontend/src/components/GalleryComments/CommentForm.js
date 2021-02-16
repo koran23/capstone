@@ -322,6 +322,11 @@ export default function CommentForm({ selectedImg }) {
               <form className="comment-form" onSubmit={onSubmit}>
                 <div className="comment-div">
                   <br />
+                  <p>Hi friend! Do you love this photo & your experience shooting
+                    with me? I'd love for you to tell the world! Click "post" and 
+                    leave a review. Your thoughts are greatly appreciated!
+                  </p>
+                  <br/>
                 </div>
               <Button onClick={onClick}>post</Button>
               </form>

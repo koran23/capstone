@@ -113,19 +113,19 @@ function Navigation({ isLoaded }) {
         <ul>
           <li>
             <NavLink to={`/gallery`}>
-              Gallery
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="/posts">
-              Posts
+              My Gallery
             </NavLink>
           </li>
           <li>
             <NavLink exact to="/about-me">
-              Profile
+              My Profile
             </NavLink>
             </li>
+          <li>
+            <NavLink exact to="/posts">
+              Reviews
+            </NavLink>
+          </li>
           <li>
             <NavLink exact to="/upload">
               Upload
