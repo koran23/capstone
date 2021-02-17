@@ -236,7 +236,7 @@ export default function CommentForm({ selectedImg }) {
     element.click();
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async(e) => {
     e.preventDefault();
 
     const payload = {
@@ -245,8 +245,8 @@ export default function CommentForm({ selectedImg }) {
       edit,
     };
 
-    dispatch(createComment(payload));
-    dispatch(fetchAllComments(selectedImg.id));
+    await dispatch(createComment(payload));
+    await dispatch(fetchAllComments(selectedImg.id));
     // history.push(`/gallery`);
   };
 

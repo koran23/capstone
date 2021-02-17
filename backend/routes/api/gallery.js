@@ -102,10 +102,9 @@ router.delete(
     
     const { comment } = req.body;
 
-    let comm = await Comment.findOne({where: {comment: comment}}).catch(e => {
+    await Comment.destroy({where: {comment: comment}}).catch(e => {
      console.log(e.message)
   })
-  comm.destroy();
   })
 );
 

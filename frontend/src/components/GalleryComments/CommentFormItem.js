@@ -76,14 +76,14 @@ export default function CommentFormItem({
   console.log();
   const loggedInUser = useSelector((store) => store.session.user);
 
-  const removeComment = (e) => {
+  const removeComment = async (e) => {
     e.preventDefault();
     const payload = {
       comment,
       userId: userId,
     };
-    dispatch(deleteComment(payload));
-    dispatch(fetchAllComments(selectedImg.id));
+     dispatch(deleteComment(payload));
+     dispatch(fetchAllComments(selectedImg.id));
   };
 
   const deleteCommentButton = () => {
@@ -102,7 +102,7 @@ export default function CommentFormItem({
   };
 
   useEffect(() => {
-    dispatch(fetchAllComments(selectedImg.id));
+    // dispatch(fetchAllComments(selectedImg.id));
   }, []);
 
   return (
