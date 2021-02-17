@@ -100,9 +100,8 @@ export const createComment = (comment) => async (dispatch) => {
   dispatch(setComment(res.data.comment));
 };
 export const deleteComment = (payload) => async (dispatch) => {
-  const { comment } = payload;
-  
-  const res = await fetch(`/api/gallery/comments/delete`, {
+
+   await fetch(`/api/gallery/comments/delete`, {
     method: "DELETE",
     body: JSON.stringify(payload),
   });
