@@ -26,6 +26,12 @@ function LoginFormPage() {
     );
   };
 
+  const demoOnClick = (e) => {
+    e.preventDefault();
+    setCredential("demo@user.io")
+    setPassword("password")
+  }
+
   return (
     <StyledAuth>
       <div >
@@ -60,6 +66,7 @@ function LoginFormPage() {
           <Link to="/signup">
             <Button>Sign Up</Button>
           </Link>
+          <Button onClick={demoOnClick}>Demo</Button>
         </form>
       </div>
     </StyledAuth>
