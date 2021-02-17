@@ -205,8 +205,8 @@ export default function AboutMeLeft() {
               >
                 Edit
               </Button>
-              <br/>
-              <br/>
+              <br />
+              <br />
             </form>
             <div class="shadow">
               <div class="about-img">
@@ -221,24 +221,24 @@ export default function AboutMeLeft() {
           </div>
           <ul class="icons">
             <li>
-              <i class="fab fa-facebook-f">
-                <a href={`${loggedInUser.facebook}`} />
-              </i>
+              <a href={`${loggedInUser.facebook}`}>
+                <i class="fab fa-facebook-f"></i>
+              </a>
             </li>
             <li>
-              <i class="fab fa-twitter">
-                <a href={`${loggedInUser.twitter}`} />
-              </i>
+              <a href={`${loggedInUser.twitter}`}>
+                <i class="fab fa-twitter"></i>
+              </a>
             </li>
             <li>
-              <i class="fab fa-linkedin">
-                <a href={`${loggedInUser.linkedin}`} />
-              </i>
+              <a href={`${loggedInUser.linkedin}`}>
+                <i class="fab fa-linkedin"></i>
+              </a>
             </li>
             <li>
-              <i class="fab fa-instagram">
-                <a href={`${loggedInUser.instagram}`} />
-              </i>
+              <a href={`${loggedInUser.instagram}`}>
+                <i class="fab fa-instagram"></i>
+              </a>
             </li>
           </ul>
         </div>
