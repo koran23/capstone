@@ -56,6 +56,12 @@ export const Upload = styled.div`
     margin-top: 1rem;
   }
 
+    .imgPreview {
+    width: auto;
+    height: 400px;
+    /* border-radius: 50%; */
+  }
+
   button {
     padding: 0.4rem 1rem;
     background: ${(props) => props.theme.blue};
