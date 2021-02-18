@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const { setTokenCookie } = require("../../utils/auth");
 const { Comment, Photo } = require("../../db/models");
-const { singleMulterUpload, singlePublicFileUpload } = require("../../aws3");
+const { singleMulterUpload, singlePublicFileUpload, multipleMulterUpload, multiplePublicFileUpload } = require("../../aws3");
 const router = express.Router();
 
 // Get all photos
@@ -61,20 +61,22 @@ router.get(
 // upload photos
 router.post(
   "/:userId",
-  singleMulterUpload("image"),
+  multipleMulterUpload("images"),
   asyncHandler(async (req, res) => {
     const { userId, delivered } = req.body;
-    const url = await singlePublicFileUpload(req.file);
-    const photo = await Photo.create({
-      userId,
-      url,
-      delivered
-    });
-
+    const urls = await multiplePublicFileUpload(req.files);
+    const photos = await Promise.all(urls.map((url) => {
+      return Photo.create({
+        userId,
+        url,
+        delivered
+      });
+    }))
+    
     // setTokenCookie(res, photo);
 
     return res.json({
-      photo,
+      photos,
     });
   })
 );

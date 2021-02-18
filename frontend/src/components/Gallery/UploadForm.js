@@ -86,8 +86,9 @@ export const Upload = styled.div`
 const UploadForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [imgPreview, setImagePreview] = useState(null);
-  const [image, setImage] = useState({ name: null });
+  const [imgPreview, setImagePreview] = useState([]);
+  // const [image, setImage] = useState({ name: null });
+  const [images, setImages] = useState([]);
   const [delivered, setDelivered] = useState(false);
   const [errors, setErrors] = useState([]);
 
@@ -100,10 +101,10 @@ const UploadForm = () => {
     let newErrors = [];
     console.log(delivered);
     dispatch(
-      createPhoto({ userId: loggedInUser.id, delivered: delivered, image })
+      createPhoto({ userId: loggedInUser.id, delivered: delivered, images })
     )
       .then(() => {
-        setImage(null);
+        setImages(null);
       })
       .catch((res) => {
         if (res.data && res.data.errors) {
@@ -114,12 +115,12 @@ const UploadForm = () => {
   };
 
   const updatePost = (e) => {
-    const file = e.target.files[0];
-    if (file) setImage(file);
-
+    const files = e.target.files;
+    if (files) setImages(files);
+    console.log(files)
     const fileReader = new FileReader();
-    if (file) {
-      fileReader.readAsDataURL(file);
+    if (files) {
+      fileReader.readAsDataURL(files);
     }
     fileReader.onloadend = () => {
       setImagePreview(fileReader.result);
@@ -130,7 +131,7 @@ const UploadForm = () => {
     <Upload>
       <form onSubmit={handleSubmit}>
         <label>
-          <input type="file" onChange={updatePost} name="image" />
+          <input type="file" multiple onChange={updatePost} name="images" />
           {/* <span>+</span> */}
         </label>
         <img className="imgPreview" src={imgPreview} alt=""></img>
