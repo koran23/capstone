@@ -10,6 +10,21 @@ const ImgGrid = styled.div`
     display: block;
     
   }
+  .title h1{
+  color: var(--primary);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: normal;
+}
+.title h2, .title p{
+  text-align: center;
+  color: ${(props) => props.theme.primaryColor}
+}
+.title h2{
+  color: ${(props) => props.theme.primaryColor}
+  margin-top: 60px;
+  font-size: 2.6rem;
+}
   .tag-options {
   padding-top:10px;
   margin-bottom: 10px;
@@ -204,13 +219,17 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
 
   return (
     <ImgGrid>
-      <main>
+      <main>     
         <div className="everything">
           <div className="index-photo-display">
               <div className="tag-options">
             <Link to={`/gallery`}>Proofs</Link>
             <Link to={`/delivered`}>Delivered</Link>
           </div>
+           <div className="title">
+            <h2>Your Pictures</h2>
+            <p>Please select your favorite photos</p>
+        </div>
             <div className="index-sub-display">
               <div className="tile">
                 {currentPhotos &&

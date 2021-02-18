@@ -70,11 +70,18 @@ export const fetchAllComments = (photoId) => async (dispatch) => {
 };
 
 export const createPhoto = (photo) => async (dispatch) => {
-  const { image, userId, delivered } = photo;
+  const { image, images, userId, delivered } = photo;
   const formData = new FormData();
+console.log(images)
+  // multiple files
+    if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
 
   // for single file
-  if (image) formData.append("image", image);
+  // if (image) formData.append("image", image);
   formData.append("delivered", delivered);
   formData.append("userId", userId);
 
