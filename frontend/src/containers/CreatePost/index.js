@@ -70,6 +70,7 @@ export default function CreatePost({ selectedImg }) {
   const [imgPreview, setImagePreview] = useState(selectedImg.url);
   const [image, setImage] = useState(selectedImg.url);
   const [caption, setCaption] = useState("");
+  const [disableBtn, setDisableBtn] = useState(false)
 
   const loggedInUser = useSelector((state) => {
     return state.session.user;
@@ -85,7 +86,7 @@ export default function CreatePost({ selectedImg }) {
         profilePic: loggedInUser.profilePic,
         image,
         caption,
-      })
+      })    
     )
       .then(() => {
         setImage(null);
@@ -96,6 +97,7 @@ export default function CreatePost({ selectedImg }) {
           setErrors(newErrors);
         }
       });
+      setDisableBtn(true)
   };
 
   // const updatePost = (e) => {
@@ -129,7 +131,7 @@ export default function CreatePost({ selectedImg }) {
             <form onSubmit={handleSubmit}>
               <img className="imgPreview" src={imgPreview} alt=""></img>
               <br></br>
-              <button className="contact-form-btn-upload" type="submit">
+              <button disabled={disableBtn} className="contact-form-btn-upload" type="submit">
                 Post
               </button>
             </form>
