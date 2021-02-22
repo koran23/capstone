@@ -14,7 +14,7 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/gallery" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +66,8 @@ function LoginFormPage() {
           <Link to="/signup">
             <Button>Sign Up</Button>
           </Link>
+          <br></br>
+          <br></br>
           <Button onClick={demoOnClick}>Demo</Button>
         </form>
       </div>
