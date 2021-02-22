@@ -266,10 +266,10 @@ export default function CommentForm({ selectedImg }) {
       userId: loggedInUser.id,
       like,
     };
-    dispatch(likePhoto(payload));
+     dispatch(likePhoto(payload));
   };
 
-  useEffect(() => {}, [like]);
+  useEffect(() => {}, [dispatch, like]);
 
   useEffect(() => {
     dispatch(fetchAllComments(selectedImg.id));

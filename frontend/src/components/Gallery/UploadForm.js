@@ -120,7 +120,7 @@ const UploadForm = () => {
     console.log(files)
     const fileReader = new FileReader();
     if (files) {
-      fileReader.readAsDataURL(files);
+      fileReader.readAsDataURL(files[0]);
     }
     fileReader.onloadend = () => {
       setImagePreview(fileReader.result);
