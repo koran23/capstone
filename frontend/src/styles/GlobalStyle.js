@@ -18,13 +18,14 @@ const GlobalStyle = createGlobalStyle`
 
 	body {
 		font-size: 1rem;
+		height: 100vh;
 		font-family: ${(props) => props.theme.font}, sans-serif;
 		color: ${(props) => props.theme.primaryColor};
 		background-color: ${(props) => props.theme.bg};
 		line-height: 1.8;
 		 /* opacity: 0.87; */
-  		/* background-image: radial-gradient(#383838 .5px, #fafafa .72px);
-  		background-size: 20px 20px; */
+  		background-image: radial-gradient(#383838 0px, #fafafa .72px);
+  		background-size: 20px 20px;
 	}
 
 	h1, h2, h3, h4, h5, h6 {

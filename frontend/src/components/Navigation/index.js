@@ -164,9 +164,9 @@ function Navigation({ isLoaded }) {
     <Bar>
       <ul>
         <li className="list">
-          <NavLink className="home" exact to="/">
+          {/* <NavLink className="home" exact to="/">
             Home
-          </NavLink>
+          </NavLink> */}
         </li>
       </ul>
       {isLoaded && sessionLinks}
