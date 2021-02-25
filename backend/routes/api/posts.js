@@ -54,6 +54,18 @@ router.post(
   })
 );
 
+router.delete(
+  "/posts/delete",
+  asyncHandler(async (req, res) => {
+    
+    const { post } = req.body;
+
+    await Post.destroy({where: {id: post}}).catch(e => {
+     console.log(e.message)
+  })
+  })
+);
+
 // comment on post
 router.post(
   "/comments/:userId",
