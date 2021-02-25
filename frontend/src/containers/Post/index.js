@@ -62,27 +62,48 @@ const Posts = ({ thePost }) => {
   const loggedInUser = useSelector((store) => store.session.user);
   const [vote, setVote] = useState(1);
 
-  const onVote = (e) => {
-    e.preventDefault();
-    setVote(thePost.vote + 1);
-    //  if (vote === 1) setVote((thePost.vote) - 1)
+  // const onVote = (e) => {
+  //   e.preventDefault();
+  //   setVote(thePost.vote + 1);
+  //   //  if (vote === 1) setVote((thePost.vote) - 1)
 
+  //   const payload = {
+  //     postId: thePost.id,
+  //     userId: loggedInUser.id,
+  //     vote,
+  //   };
+  //   dispatch(createVote(payload));
+  // };
+
+   const removePost = async (e) => {
+    e.preventDefault();
     const payload = {
-      postId: thePost.id,
-      userId: loggedInUser.id,
-      vote,
+      id: thePost.id,
     };
-    dispatch(createVote(payload));
+    //  dispatch(deleteComment(payload));
+    //  dispatch(fetchAllComments(selectedImg.id));
   };
 
-   useEffect(async () => {
-    // Request to the server.
-    // const response = await fetch("/api/bands");
-    // setBands(response.data.bands);
-    const setVote = () => thePost.vote = thePost.vote + 1;
-    setVote()
+    const deletePostButton = () => {
+    const deleteButton = (
+      <button className="post__delete" 
+      onClick={removePost}
+      >delete
+      </button>
+    );
+    if (loggedInUser.id === thePost.userId) {
+      return deleteButton;
+    }
+  };
+
+  //  useEffect(async () => {
+  //   // Request to the server.
+  //   // const response = await fetch("/api/bands");
+  //   // setBands(response.data.bands);
+  //   const setVote = () => thePost.vote = thePost.vote + 1;
+  //   setVote()
     
-  }, [vote]);
+  // }, [vote]);
 
 
   return (
@@ -93,7 +114,7 @@ const Posts = ({ thePost }) => {
             <img className="post__profilePic" src={thePost.profilePic} />
             <p style={{ marginLeft: "8px" }}>{thePost.username}</p>
           </div>
-          <button className="post__delete">delete</button>
+          {/* {deletePostButton()} */}
         </div>
         <div className="post__center">
           <img className="post__photoUrl" src={thePost.picture} />
@@ -109,7 +130,7 @@ const Posts = ({ thePost }) => {
         </div>
         <div className="votes">
           <button
-            onClick={onVote}
+            // onClick={onVote}
             className="votes_count"
             // onClick={() => product.updateCount(product.id)}
           >
@@ -117,18 +138,6 @@ const Posts = ({ thePost }) => {
             {thePost.vote}
           </button>
         </div>
-        {/* <CommentInput postId={thePost.id} /> */}
-        {/* {thePost.Comments ? (
-          thePost.Comments.map((comment) => {
-            return <Comment
-              username={User.username}
-              id={comment.userId}
-              caption={comment.comment}
-            />
-          })
-        ) : (
-          <></>
-        )} */}
       </div>
     </PostStyle>
   );

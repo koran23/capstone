@@ -112,6 +112,7 @@ const UploadForm = () => {
           setErrors(newErrors);
         }
       });
+      history.push('/gallery')
   };
 
   const updatePost = (e) => {
