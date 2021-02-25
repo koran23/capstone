@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../store/posts";
-import { set } from "js-cookie";
+import { useHistory } from "react-router-dom";
 
 const Upload = styled.div`
   form {
@@ -65,6 +65,7 @@ const Upload = styled.div`
 `;
 
 export default function CreatePost({ selectedImg }) {
+  const history = useHistory();
   const [error, setErrors] = useState(null);
   const dispatch = useDispatch();
   const [imgPreview, setImagePreview] = useState(selectedImg.url);
@@ -96,6 +97,7 @@ export default function CreatePost({ selectedImg }) {
           setErrors(newErrors);
         }
       });
+      history.push('/posts')
   };
 
   // const updatePost = (e) => {

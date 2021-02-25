@@ -75,6 +75,18 @@ const Posts = ({ thePost }) => {
     dispatch(createVote(payload));
   };
 
+    const deletePostButton = () => {
+    const deleteButton = (
+      <button className="post__delete" 
+      // onClick={removeComment}
+      >delete
+      </button>
+    );
+    if (loggedInUser.id === thePost.userId) {
+      return deleteButton;
+    }
+  };
+
    useEffect(async () => {
     // Request to the server.
     // const response = await fetch("/api/bands");
@@ -93,7 +105,7 @@ const Posts = ({ thePost }) => {
             <img className="post__profilePic" src={thePost.profilePic} />
             <p style={{ marginLeft: "8px" }}>{thePost.username}</p>
           </div>
-          <button className="post__delete">delete</button>
+          {deletePostButton()}
         </div>
         <div className="post__center">
           <img className="post__photoUrl" src={thePost.picture} />
