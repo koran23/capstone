@@ -173,7 +173,6 @@ function EditSocialPage() {
             type="text"
             value={twitter}
             onChange={(e) => setTwitter(e.target.value)}
-            required
           />
         </label>
 
@@ -183,7 +182,6 @@ function EditSocialPage() {
             type="text"
             value={facebook}
             onChange={(e) => setFacebook(e.target.value)}
-            required
           />
         </label>
 
@@ -193,7 +191,6 @@ function EditSocialPage() {
             type="text"
             value={instagram}
             onChange={(e) => setInstagram(e.target.value)}
-            required
           />
         </label>
 
@@ -203,7 +200,6 @@ function EditSocialPage() {
             type="text"
             value={linkedin}
             onChange={(e) => setLinkedin(e.target.value)}
-            required
           />
         </label>
 
