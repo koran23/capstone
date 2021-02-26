@@ -195,7 +195,7 @@ function EditSocialPage() {
         </label>
 
         <label>
-          Linkden
+          Linkedin
           <input
             type="text"
             value={linkedin}
