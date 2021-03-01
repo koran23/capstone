@@ -122,7 +122,7 @@ function Navigation({ isLoaded }) {
             </NavLink>
             </li>
           <li>
-            <NavLink exact to="/posts">
+            <NavLink exact to="/explore">
               Reviews
             </NavLink>
           </li>
