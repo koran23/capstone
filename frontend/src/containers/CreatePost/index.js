@@ -97,7 +97,7 @@ export default function CreatePost({ selectedImg }) {
           setErrors(newErrors);
         }
       });
-      history.push('/posts')
+      history.push('/explore')
   };
 
   // const updatePost = (e) => {
