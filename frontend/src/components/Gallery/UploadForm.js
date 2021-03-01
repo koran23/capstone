@@ -99,7 +99,6 @@ const UploadForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    console.log(delivered);
     dispatch(
       createPhoto({ userId: loggedInUser.id, delivered: delivered, images })
     )
@@ -113,12 +112,12 @@ const UploadForm = () => {
         }
       });
       history.push('/gallery')
+
   };
 
   const updatePost = (e) => {
     const files = e.target.files;
     if (files) setImages(files);
-    console.log(files)
     const fileReader = new FileReader();
     if (files) {
       fileReader.readAsDataURL(files[0]);

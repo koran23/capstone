@@ -56,6 +56,7 @@ export default function Splash() {
       <div className='body'>
           <div id='showcase'>
         <h1>Welcome</h1>
+        
        <Link to={'/login'}>Get Started</Link>
         </div>
         </div>

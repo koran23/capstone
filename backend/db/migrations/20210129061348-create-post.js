@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       caption: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       username: {
         type: Sequelize.STRING
