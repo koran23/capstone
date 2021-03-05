@@ -14,7 +14,7 @@ router.get(
       order: [
         ['vote', 'DESC']
       ],
-      include: Comment
+      include: User
     });
 
     return res.json({posts: posts});

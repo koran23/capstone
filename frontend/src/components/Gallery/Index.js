@@ -247,7 +247,7 @@ const ImageGrid = ({ setSelectedImg, selectedImg }) => {
                           <div className="username-display">
                             <div className="photo-index-user">
                               <Link to={`/about-me`}>
-                                <img src={loggedInUser.profilePic} />
+                                {/* <img src={loggedInUser.profilePic} /> */}
                               </Link>
                             </div>
                             <div className="photo-index-username">

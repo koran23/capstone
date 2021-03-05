@@ -6,6 +6,11 @@ import Button from "../../styles/Button";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+const ModalDiv = styled.div`
+display: flex;
+position: fixed;
+`
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -35,7 +40,7 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
+    <ModalDiv>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
@@ -48,7 +53,7 @@ function ProfileButton({ user }) {
           </li>
         </ul>
       )}
-    </>
+    </ModalDiv>
   );
 }
 

@@ -7,14 +7,14 @@ import styled from "styled-components";
 import Button from '../../styles/Button';
 
 export const StyledAuth = styled.div`
-   width: 385px;
+  width: 385px;
   padding: 3rem 1.5rem;
-  /* background: ${(props) => props.theme.grey}; */
+  background: ${(props) => props.theme.secondaryColor};
   border-radius: 4px;
-  
   margin: 8% auto;
 
-
+form {
+}
   h2 {
     margin-bottom: 1.3rem;
   }
@@ -108,6 +108,7 @@ function SignupFormPage() {
 
   return (
     <StyledAuth>
+      <div className='form'>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -164,6 +165,7 @@ function SignupFormPage() {
           <Link to='/login'><Button>Login</Button></Link>
         {/* </div> */}
       </form>
+    </div>
     </StyledAuth>
   );
 }

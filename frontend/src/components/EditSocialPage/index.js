@@ -134,6 +134,7 @@ function EditSocialPage() {
           setErrors(newErrors);
         }
       });
+      history.push('/about-me')
   };
 
   const updatePost = (e) => {
