@@ -20,6 +20,8 @@ import SinglePhotoPage from "./components/SinglePhotoPage";
 import CreatePost from "./containers/CreatePost/index";
 import ImageGridDelivered from "./components/DeliveredPhotos";
 import DeliveredModal from "./components/DeliveredPhotos/DeliveredModal";
+import Footer from "./components/Footer";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -88,6 +90,7 @@ function App() {
           </Switch>
         </Container>
       )}
+      <Footer/>
     </>
   );
 }

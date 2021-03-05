@@ -80,7 +80,7 @@ const Left = styled.div`
     margin-top: 1.2rem;
   }
   .icons {
-    background: #fff;
+    background: ${(props) => props.theme.bg};
     display: flex;
     justify-content: center;
     padding: 0.8rem 0;

@@ -58,6 +58,7 @@ const PostStyle = styled.div`
 `;
 
 const Posts = ({ thePost }) => {
+  console.log(thePost)
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.session.user);
   const [vote, setVote] = useState(1);
@@ -111,7 +112,7 @@ const Posts = ({ thePost }) => {
       <div className="post">
         <div className="post__header">
           <div className="post__headerLeft">
-            <img className="post__profilePic" src={thePost.profilePic} />
+            <img className="post__profilePic" src={thePost.User.profilePic} />
             <p style={{ marginLeft: "8px" }}>{thePost.username}</p>
           </div>
           {/* {deletePostButton()} */}
