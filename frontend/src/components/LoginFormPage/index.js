@@ -34,7 +34,7 @@ function LoginFormPage() {
 
   return (
     <StyledAuth>
-      <div >
+      <div className='form'>
         <form onSubmit={handleSubmit}>
           <ul>
             {errors.map((error, idx) => (
