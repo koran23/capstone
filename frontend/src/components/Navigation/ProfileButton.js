@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const ModalDiv = styled.div`
 display: flex;
-position: fixed;
+/* position: fixed; */
 `
 
 function ProfileButton({ user }) {
