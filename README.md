@@ -7,7 +7,7 @@
   
 <h1 align="center"> Shoot </h1>
 
-Shoot is designed for... Check it out [here](https://map-my-road-trip.herokuapp.com/login).
+Shoot is designed for clients to be able to be directly involved in the process of editing to the delivering of their photos. Check it out [here](https://pic-select.herokuapp.com/login).
 
 ### Built With
 
