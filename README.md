@@ -1,4 +1,4 @@
-<!-- 
+
 <br />
 <p align="center">
   <a href="https://map-my-road-trip.herokuapp.com/login">
@@ -38,14 +38,20 @@ Shoot is designed for... Check it out [here](https://map-my-road-trip.herokuapp.
 <a href="https://heroku.com/"><img alt="Heroku" src="https://img.shields.io/badge/-Heroku-430098?style=flat-square&logo=Heroku&logoColor=white" /></a>
 
 ### Features
-#### 1
-![Alt text]()
+<!-- #### Inviting splash page with the ability to see Trip Keeper's functionality in full prior to sign up with its demo login
+![Alt text](https://raw.githubusercontent.com/rhwebster/mapmyroadtrip/main/react-app/public/images/home.png) -->
 
-#### 2  
-![Alt text](g)
+#### Easy navigation available on each page with access to a feed of all client reviews, an editable profile page with social media links, and a complete photo album of pictures for you to choose from and comment on. 
+![Alt text](frontend/src/assets/splash.png)
 
-#### 3
-![Alt text]()
+#### Clients are able to choose their favorite photos from a photoshoot, shot by yours truly. They do this by liking the photo, which then changes the tone from black and white, to a color a image.
+![Alt text](frontend/src/assets/select.png)
 
-#### 4
-![Alt text]() -->
+#### Clients are able to also comment on their favorite photos, requesting specific changes they would like to be made to the photo. Want to add a little fluff to your hair? So be it.
+![Alt text](frontend/src/assets/comment.png)
+
+#### Clients can then download the photos once they're delivered, straight from the gallery! They can also pick their aboslute favorite photo leave a nice review for eveyone to see by posting it, without having to reupload the image.
+![Alt text](frontend/src/assets/post.png)
+
+#### Don't forget to edit your profile page! Just click edit profile and add an image along with your social media links.
+![Alt text](frontend/src/assets/profile.png)

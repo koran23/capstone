@@ -17,6 +17,7 @@ background-size: cover;
   margin: 0;
   font-size: 17px;
   line-height: 1.6;
+  text-align: center;
   /* font-family: "Noto Serif"; */
   color: ${(props) => props.theme.primaryColor};
 }
@@ -40,7 +41,11 @@ background-size: cover;
     color: ${(props) => props.theme.white};
     border-radius: 10px;
 }
-`;
+#showcase p {
+  padding-bottom: 30px;
+  color: ${(props) => props.theme.secondaryColor};
+}
+`
 
 export default function Splash() {
   return (
@@ -56,7 +61,8 @@ export default function Splash() {
       <div className='body'>
           <div id='showcase'>
         <h1>Welcome</h1>
-        
+        <p>Please login here to start viewing your photo gallery!
+        </p>
        <Link to={'/login'}>Get Started</Link>
         </div>
         </div>
