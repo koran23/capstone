@@ -33,9 +33,8 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-function Root() {
-
-  return (
+ReactDOM.render(
+  <React.StrictMode>
      <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
       <ToastContainer
@@ -49,12 +48,6 @@ function Root() {
       </BrowserRouter>
     </Provider>
     </ThemeProvider>
-  );
-}
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );
