@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { unloadGallery } from "../../store/gallery";
 import { motion } from 'framer-motion';
@@ -125,7 +125,7 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
       Redirect(`/gallery/${loggedInUser.id}`)
   }
 
-    useEffect(async () => {
+    useEffect(() => {
     // Request to the server.
     // const response = await fetch("/api/bands");
     // setBands(response.data.bands);
@@ -133,9 +133,7 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
      return () => {
       dispatch(unloadGallery())
     }
-  }, []);
-  
-  console.log(selectedImg)
+  }, [dispatch]);
   
   
   return (

@@ -1,6 +1,4 @@
-import React, {useEffect} from 'react'
-import { useDispatch} from "react-redux";
-import { unloadGallery } from "../../store/gallery";
+import React from 'react'
 import CommentFormItem from '../GalleryComments/CommentFormItem'
 import CommentForm from '../GalleryComments/CommentForm'
 import styled from 'styled-components';

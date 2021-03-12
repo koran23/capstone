@@ -94,7 +94,7 @@ export default function SinglePhotoPage() {
       <div className='show-col-container'>
         <div className="show-container">
           <div className="show-mid-col">
-            <img className='show-image' src={Photo.url} />
+            <img alt='image' className='show-image' src={Photo.url} />
           </div>
         </div>
         </div>
@@ -116,7 +116,7 @@ export default function SinglePhotoPage() {
       <div className='show-col-container'>
         <div className="show-container">
           <div className="show-mid-col">
-            <img className='show-image' src={Photo.url} />
+            <img alt='image' className='show-image' src={Photo.url} />
           </div>
         </div>
         </div>

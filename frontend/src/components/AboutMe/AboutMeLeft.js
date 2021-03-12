@@ -160,7 +160,6 @@ export default function AboutMeLeft() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = [];
-    console.log(image);
     dispatch(editProfile({ userId: loggedInUser.id, image }))
       .then(() => {
         setImage(null);
@@ -210,14 +209,13 @@ export default function AboutMeLeft() {
             </form>
             <div class="shadow">
               <div class="about-img">
-                <img src={loggedInUser.profilePic} />
+                <img alt='profile-pic' src={loggedInUser.profilePic} />
               </div>
             </div>
             <h2>
               {loggedInUser.username}
               <br></br>
             </h2>
-            <h3></h3>
           </div>
           <ul class="icons">
             <li>

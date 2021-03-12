@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import * as sessionActions from "../../store/session";
-import { Redirect } from "react-router-dom";
 import Button from "../../styles/Button";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";

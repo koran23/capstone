@@ -275,7 +275,7 @@ export default function CommentForm({ selectedImg }) {
     dispatch(fetchAllComments(selectedImg.id));
   }, [dispatch, selectedImg.id]);
 
-  if (selectedImg.like == true) {
+  if (selectedImg.like === true) {
     likeButtonText = (
       <i className="fa fa-heart like-button-liked" aria-hidden="true"></i>
     );
@@ -283,7 +283,7 @@ export default function CommentForm({ selectedImg }) {
 
   return (
     <Comments>
-      {selectedImg.delivered == false ? (
+      {selectedImg.delivered === false ? (
         <div>
           <div className="comment-like">
             {/* <h2 className="h2-comment"> {photo.title} </h2> */}

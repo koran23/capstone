@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { editProfile } from "../../store/profile";
 import styled from "styled-components";
-import Button from "../../styles/Button";
+
 
 export const StyledAuth = styled.div`
   width: 385px;
@@ -85,7 +85,6 @@ export const StyledAuth = styled.div`
 
 function EditSocialPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
   const [twitter, setTwitter] = useState("");
   const [facebook, setFacebook] = useState("");

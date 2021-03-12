@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllDeliveredPhotos, unloadGallery } from "../../store/gallery";
+import { fetchAllDeliveredPhotos} from "../../store/gallery";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
@@ -136,9 +136,9 @@ const ImageGridDelivered = ({ setSelectedImg, selectedImg }) => {
 
   const loggedInUser = useSelector((store) => store.session.user);
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(fetchAllDeliveredPhotos({ userId: loggedInUser.id }));
-  }, []);
+  }, [dispatch, loggedInUser.id]);
 
   return (
     <ImgGrid>
