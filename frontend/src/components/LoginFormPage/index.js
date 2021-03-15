@@ -10,8 +10,8 @@ import Button from "../../styles/Button";
 function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
+  let [credential, setCredential] = useState("");
+  let [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/gallery" />;
@@ -26,10 +26,33 @@ function LoginFormPage() {
     );
   };
 
+  // const demoOnClick = (e) => {
+  //   e.preventDefault();
+  //   setCredential("demo@user.io")
+  //   setPassword("password")
+  // }
+
+
+
+
   const demoOnClick = (e) => {
-    e.preventDefault();
-    setCredential("demo@user.io")
-    setPassword("password")
+    // e.preventDefault();
+    let guestUser = 'demo@user.io'.split("");
+    console.log(guestUser)
+    let guestPass = 'password'.split("");
+    const intervalMain = setInterval(() => {
+      if (guestUser.length > 0) {
+        credential = credential + guestUser.shift()
+        setCredential(credential)
+      }
+      else if (guestPass.length > 0) {
+        password = password + guestPass.shift()
+        setPassword(password)     
+      } else {
+        clearInterval(intervalMain);
+        dispatch(sessionActions.login({ credential, password }))
+      }
+    }, 100);
   }
 
   return (
